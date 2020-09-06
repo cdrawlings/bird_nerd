@@ -1,0 +1,16 @@
+p {
+  margin: 0.8rem 0;
+}
+
+.login-container {
+  width: 400px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.btn-float {
+  float: left;
+  margin-right: 10px;
+}
+
+/*# sourceMappingURL=style.css.map */
