@@ -1,0 +1,88 @@
+{{#if birds}}
+    <ul>
+        {{#each birds}}
+            <li>
+                <div class="spotted-birds">
+
+                    <input id="{{speciesCode}}Code" type="text" value="{{speciesCode}}" name="code">
+                    <input type="text" value="{{comName}}" name="code" id="{{speciesCode}}Name">
+
+                    <a href="https://ebird.org/species/{{speciesCode}}/us" class="bird-name">{{comName}}</a>
+                    <!-- Button trigger modal -->
+
+                    <button type="button" id="{{speciesCode}}Count" class="btn btn-primary" data-toggle="modal" data-target="#myModal">0</button>
+
+                    <i class="fas fa-plus-circle"></i>
+                    <i class="fas fa-minus-circle"></i>
+
+                </div>
+            </li>
+        {{/each}}
+
+    </ul>
+{{else}}
+        <p>You have not spotted any birds</p>
+{{/if}}
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="birdModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="birdModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-count">
+                <input type="text" id="modal-input">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save-input" data-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    let elements = document.querySelectorAll('.spotted-birds');
+    let code, name, count, title, modalCount, save, input;
+
+    elements.forEach((element) => {
+        element.addEventListener('mousedown', (e) => {
+            code = element.firstElementChild.value;
+            name = document.getElementById(code + "Name").value;
+            count = document.getElementById(code + "Count");
+            title = document.getElementById('birdModalLabel');
+            modalCount = document.getElementById('modal-count');
+
+            save = document.getElementById('save-input');
+
+            console.log("count: ", count.innerText);
+
+            title.innerText = `${name} Spotted`
+            modalCount.innerHTML = `<label for="modal-input">Enter birds spotted</label> <input type="text" value="${count.innerText}" id="modal-input">`
+
+            save.addEventListener('click', (e) => {
+                input = document.getElementById('modal-input');
+
+
+                console.log("m count: ", count);
+                count.innerText = input.value;
+
+                console.log(input.value);
+                console.log("i count: ", count);
+                console.log("save");
+
+
+
+            })
+
+        });
+    });
+
+</script>
+

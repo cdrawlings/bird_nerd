@@ -13,4 +13,8 @@ p {
   margin-right: 10px;
 }
 
+#bird-list {
+  display: none;
+}
+
 /*# sourceMappingURL=style.css.map */

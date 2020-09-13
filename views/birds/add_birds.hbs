@@ -1,0 +1,27 @@
+{{name}}
+
+{{location.locality}}
+
+<div class="container search-container">
+    <section>
+        Location
+        <div id="b-location"> {{location.location}} a</div>
+        <div id="b-longitude"> {{location.longitude}}</div>
+        <div id="b-latitude">{{location.latitude}}</div>
+    </section>
+
+    <div class="search card card-body">
+        <h1>Recent birds</h1>
+        <p class="lead">list of birds seen in the area ine the last 30 days</p>
+        <input type="text" id="filterBird" class="form-control" placeholder="Bird Name">
+    </div>
+
+    <br>
+    <div id="bird-list">
+    </div>
+
+</div>
+
+
+<script src="/js/birds.js"></script>
+

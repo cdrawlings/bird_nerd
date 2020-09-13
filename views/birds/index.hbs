@@ -1,0 +1,21 @@
+
+
+{{#if birds}}
+    <ul>
+        {{#each birds}}
+            <li>
+                <div>
+                    <a href="https://ebird.org/species/{{speciesCode}}/us" class="bird-name">{{comName}}</a>
+
+                    <i class="fas fa-chart-pie"></i>
+
+
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+{{else}}
+    <p>You have not spotted any birds</p>
+{{/if}}
+
+<script src="../../public/js/weather.js"></script>

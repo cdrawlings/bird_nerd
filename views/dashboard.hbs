@@ -1,39 +1,89 @@
+
+
 <h6>Dashboard</h6>
 
 {{name}}
-{{#if stories}}
-    <table class="striped">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each stories}}
-            <tr>
-                <td><a href="/stories/{{_id}}">{{title}}</a></td>
-                <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
-                <td><span class"dash-stories">{{status}}</span></td>
-                <td width="200px">
-                    <a href="/stories/edit/{{_id}}" class="btn btn-float">
-                        <i class="fas fa-edit"></i>
-                    </a>
+{{location.longitude}}
 
-                    <form action="/stories/{{_id}}" method="POST" id="delete">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn"><i class="fas fa-trash"></i></button>
-                    </form>
-                
-                
-                
-                </td>
+{{#if location}}
+
+<!-- if there is location information show Bird -->
+
+    {{#if stories}}
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th></th>
             </tr>
-        {{/each}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {{#each stories}}
+                <tr>
+                    <td><a href="/stories/{{_id}}">{{title}}</a></td>
+                    <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
+                    <td><span class"dash-stories">{{status}}</span></td>
+                    <td width="200px">
+                        <a href="/stories/edit/{{_id}}" class="btn btn-float">
+                            <i class="fas fa-edit"></i>
+                        </a>
+
+                        <form action="/stories/{{_id}}" method="POST" id="delete">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn"><i class="fas fa-trash"></i></button>
+                        </form>
+
+
+
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <p>You have not created any stories</p>
+    {{/if}}
+
 {{else}}
-<p>You have not created any stories</p>
+
+    <!-- if  there is NO location information get location -->
+
+    <form action="/add_location" method="POST" class="form-group">
+        <div class="get-location row">
+            <label for="latitude">Latitude</label>
+            <input id="latitude" value="" type="text" name="latitude" class="form-control">
+        </div>
+
+        <div  class="get-location row">
+            <label for="longitude">Longitude</label>
+            <input id="longitude" value="" type="text" name="longitude" class="form-control">
+        </div>
+
+        <div  class="get-location row">
+            <label for="locality">Your location will be listed as:</label>
+            <input id="locality" value="" type="text" name="location" class="form-control">
+        </div>
+
+        <div id="city-loc"></div>
+
+        <div class="row">
+            <input type="submit" value="Accept" class="btn">
+        </div>
+
+    </form>
+
 {{/if}}
+
+
+<form action="start" method="POST" class="form-group">
+    <input type="text" id="tempature" aria-hidden="true" value="" name="tempature">
+    <input type="text" id="condition" aria-hidden="true" value="" name="condition">
+    <input type="text" id="local" aria-hidden="true" value="{{location._id}}" name="local">
+
+
+    <input type="submit" value="Start Session">
+</form>
+
+<script src="/js/location.js"></script>
