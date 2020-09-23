@@ -73,5 +73,25 @@ router.post('/add_bird', ensureAuth, async (req, res) => {
 });
 
 
+// @desc    updates session with the new number of birds spotted
+// @route   PUT /birds
+router.post('/update_session/:id', ensureAuth, async (req, res) => {
+    console.log(req.body)
+
+    const update = new Watch({
+        count: {
+            count: req.body.count,
+            bird: req.body.birdID,
+        }
+    });
+
+    update.save()
+        .then(data => { res.json(data) })
+        .catch(err => { res.send("Error posting to DB")  });
+});
+
+
+
+
 
 module.exports = router
