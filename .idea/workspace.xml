@@ -22,9 +22,7 @@
     <list default="true" id="6fff1d82-b51f-4a18-8f6a-8a911a288d8d" name="Default Changelist" comment="Ready to change for bird nerd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/WatchSession.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/WatchSession.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/birds.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/birds.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/birds/session.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/birds/session.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/dashboard.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/dashboard.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +96,7 @@
       <workItem from="1599841901255" duration="7499000" />
       <workItem from="1599922235448" duration="10426000" />
       <workItem from="1600004955728" duration="2506000" />
-      <workItem from="1600954548782" duration="3977000" />
+      <workItem from="1600954548782" duration="5618000" />
     </task>
     <task id="LOCAL-00001" summary="Ready to change for bird nerd">
       <created>1599404313855</created>
@@ -114,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600875257690</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Adding count to DB">
+      <created>1600963446373</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1600963446373</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,7 +141,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Ready to change for bird nerd" />
     <MESSAGE value="Modal updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modal updated" />
+    <MESSAGE value="Adding count to DB" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding count to DB" />
   </component>
   <component name="WindowStateProjectService">
     <state x="0" y="224" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599331055489">

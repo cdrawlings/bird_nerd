@@ -82,7 +82,8 @@ router.post('/update/:id', ensureAuth, async (req, res) => {
         {
             $push: {
                 count: {
-                    count: req.body.count
+                    count: req.body.count,
+                    code: req.body.code
                 }
             }
         }, {

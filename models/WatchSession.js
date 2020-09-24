@@ -5,6 +5,9 @@ const CountSchema = new mongoose.Schema({
     count: {
         type: Number
     },
+    code: {
+        type: String
+    },
 });
 
 const WatchSessionSchema = new mongoose.Schema({
