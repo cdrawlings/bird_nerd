@@ -36,7 +36,7 @@ router.get('/session/:id', ensureAuth, async (req, res) => {
     try {
         const birds = await Bird.find({user: req.user.id}).lean()
         const location = await Location.findOne({user: req.user.id}).lean();
-        let session = await Watch.findById(req.params.id).populate('user').populate('bird').lean()
+        let session = await Watch.findById(req.params.id).lean()
         if (!session) {
             return res.render('errors/404')
         }
@@ -74,20 +74,26 @@ router.post('/add_bird', ensureAuth, async (req, res) => {
 
 
 // @desc    updates session with the new number of birds spotted
-// @route   PUT /birds
-router.post('/update_session/:id', ensureAuth, async (req, res) => {
-    console.log(req.body)
-
-    const update = new Watch({
-        count: {
-            count: req.body.count,
-            bird: req.body.birdID,
+// @route   POST /birds
+router.post('/update/:id', ensureAuth, async (req, res) => {
+    console.log("req", req.body);
+    const update = await Watch.findOneAndUpdate(
+        {_id: req.params.id},
+        {
+            $push: {
+                count: {
+                    count: req.body.count
+                }
+            }
+        }, {
+            new: true,
+            upsert: true,
+            rawResult: true
         }
-    });
+    );
+    console.log("Update", update);
+    res.redirect('/dashboard')
 
-    update.save()
-        .then(data => { res.json(data) })
-        .catch(err => { res.send("Error posting to DB")  });
 });
 
 

@@ -64,14 +64,18 @@ modal.innerHTML = `
                 </button>
             </div>
 
+
+<form action="/birds/update/{{session._id}}" method="POST" class="form-group">
+
             <div class="modal-body" id="modal-count">
-              <label for="modal-input">Enter birds spotted</label> <input type="text" value="${count.innerText}" id="modal-input">
+              <label for="modal-input">Enter birds spotted</label> <input type="text" value="${count.innerText}" id="modal-input" name="count">
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="save-input" data-dismiss="modal">Save changes</button>
+                <button type="Submit" class="btn btn-primary" id="save-input">Save changes</button>
             </div>
+</form>
 
      </div>
  </div>`

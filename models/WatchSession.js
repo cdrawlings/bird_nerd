@@ -1,5 +1,12 @@
 const mongoose = require('mongoose')
 
+
+const CountSchema = new mongoose.Schema({
+    count: {
+        type: Number
+    },
+});
+
 const WatchSessionSchema = new mongoose.Schema({
     tempature: {
         type: String
@@ -22,10 +29,7 @@ const WatchSessionSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Location'
     },
-    count: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Count'
-    },
-})
+    count: [CountSchema],
+});
 
 module.exports = mongoose.model('WatchSession', WatchSessionSchema)
