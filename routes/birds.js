@@ -77,13 +77,13 @@ router.post('/add_bird', ensureAuth, async (req, res) => {
 // @route   POST /birds
 router.post('/update/:id', ensureAuth, async (req, res) => {
     console.log("req", req.body);
-    const update = await Watch.findOneAndUpdate(
-        {_id: req.params.id},
+    const update = await Bird.findOneAndUpdate(
+        {_id: req.body.birdId},
         {
             $push: {
                 count: {
                     count: req.body.count,
-                    code: req.body.code
+                    watchSession: req.params.id
                 }
             }
         }, {
@@ -93,7 +93,7 @@ router.post('/update/:id', ensureAuth, async (req, res) => {
         }
     );
     console.log("Update", update);
-    res.redirect('/dashboard')
+    res.redirect('/birds/session/' + req.params.id)
 
 });
 

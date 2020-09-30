@@ -47,7 +47,7 @@
             code = element.firstElementChild.value;
             name = document.getElementById(code + "Name").value;
             count = document.getElementById(code + "Count");
-
+            id = document.getElementById(code + "ID").value;
             modalCount = document.getElementById('modal-count');
             modal = document.getElementById(code + "Modal");
 
@@ -69,7 +69,8 @@ modal.innerHTML = `
 
             <div class="modal-body" id="modal-count">
               <label for="modal-input">Enter birds spotted</label> <input type="text" value="${count.innerText}" id="modal-input" name="count">
-              <label for="modal-input">Enter birds spotted</label> <input type="text" value="${code}" id="modal-input" name="code">
+              <label for="modal-input">Enter birds spotted</label> <input type="text" value="${code}" id="modal-code" name="code">
+<label for="modal-input">ID</label> <input type="text" value="${id}" id="modal-id" name="birdId">
 
             </div>
 

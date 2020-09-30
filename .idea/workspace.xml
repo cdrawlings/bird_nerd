@@ -21,7 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6fff1d82-b51f-4a18-8f6a-8a911a288d8d" name="Default Changelist" comment="Ready to change for bird nerd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/WatchSession.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/WatchSession.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Bird.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Bird.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/birds.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/birds.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/birds/session.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/birds/session.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -209,10 +210,14 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="210" y="23" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1599244815026" />
-    <state x="314" y="83" key="Vcs.Push.Dialog.v2" timestamp="1599404320736">
+    <state x="544" y="606" key="VCS.EditChangelistDialog" timestamp="1601475777893">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="314" y="83" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1599404320736" />
+    <state x="544" y="606" key="VCS.EditChangelistDialog/0.23.1440.877@0.23.1440.877" timestamp="1601475777893" />
+    <state x="314" y="83" key="Vcs.Push.Dialog.v2" timestamp="1601475805122">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="314" y="83" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1601475805122" />
     <state x="511" y="84" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1599404191938">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
