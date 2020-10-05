@@ -1,9 +1,10 @@
-{{#if birds}}
+<div id="watchID">session._id</div>
+
+{{#if seen}}
     <ul>
-        {{#each birds}}
+        {{#each seen}}
             <li>
                 <div class="spotted-birds">
-
                     <input id="{{speciesCode}}Code" type="text" value="{{speciesCode}}" name="code">
                     <input type="text" value="{{comName}}" name="name" id="{{speciesCode}}Name">
                     <input type="text" value="{{_id}}" name="birdID" id="{{speciesCode}}ID" Name">
@@ -15,20 +16,44 @@
 
                     <i class="fas fa-plus-circle"></i>
                     <i class="fas fa-minus-circle"></i>
-
                 </div>
 
                 <!-- Modal -->
                 <div class="modal fade" id="{{speciesCode}}Modal" tabindex="-1" role="dialog" aria-labelledby="birdModalLabel" aria-hidden="true">
                 </div>
-
             </li>
         {{/each}}
-
     </ul>
 
+{{else}}
+    <p>You have not spotted any birds</p>
+{{/if}}
+<h5>Unseen</h5>
 
+{{#if birds}}
+    <ul>
+        {{#each birds}}
+            <li>
+                <div class="spotted-birds">
+                    <input id="{{speciesCode}}Code" type="text" value="{{speciesCode}}" name="code">
+                    <input type="text" value="{{comName}}" name="name" id="{{speciesCode}}Name">
+                    <input type="text" value="{{_id}}" name="birdID" id="{{speciesCode}}ID" Name">
 
+                    <a href="https://ebird.org/species/{{speciesCode}}/us" class="bird-name">{{comName}}</a>
+                    <!-- Button trigger modal -->
+
+                    <button type="button" id="{{speciesCode}}Count" class="btn btn-primary" data-toggle="modal" data-target="#{{speciesCode}}Modal">0</button>
+
+                    <i class="fas fa-plus-circle"></i>
+                    <i class="fas fa-minus-circle"></i>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="{{speciesCode}}Modal" tabindex="-1" role="dialog" aria-labelledby="birdModalLabel" aria-hidden="true">
+                </div>
+            </li>
+        {{/each}}
+    </ul>
 
 {{else}}
         <p>You have not spotted any birds</p>
@@ -50,8 +75,6 @@
             id = document.getElementById(code + "ID").value;
             modalCount = document.getElementById('modal-count');
             modal = document.getElementById(code + "Modal");
-
-
 
 modal.innerHTML = `
  <div class="modal-dialog" role="document">

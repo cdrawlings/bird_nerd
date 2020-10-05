@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
 const {ensureAuth} = require('../middleware/auth')
 
@@ -33,10 +34,24 @@ router.get('/add_birds', ensureAuth, async (req, res) => {
 // @Desc    Login/Landing Page
 // @route   GET/
 router.get('/session/:id', ensureAuth, async (req, res) => {
+    let idUser = mongoose.Types.ObjectId(req.user.id)
+    let idWatch = mongoose.Types.ObjectId(req.params.id)
     try {
-        const birds = await Bird.find({user: req.user.id}).lean()
         const location = await Location.findOne({user: req.user.id}).lean();
-        let session = await Watch.findById(req.params.id).lean()
+        const session = await Watch.findById(req.params.id).lean()
+
+        const seen = await Bird.aggregate([
+            {$project: {name: 1, count: 1, _id: 1, user: 1}},
+            {$match: {user: idUser} },
+            {$unwind: '$count'},
+            {$match: {'count.watchSession': idWatch} }
+        ]);
+        const birds = await Bird.aggregate([
+            {$project: {name: 1, count: 1, _id: 1, user: 1}},
+            {$match: {user: idUser} },
+            {$match: {'count.watchSession': {$ne: idWatch}}}
+        ]);
+
         if (!session) {
             return res.render('errors/404')
         }
@@ -47,6 +62,7 @@ router.get('/session/:id', ensureAuth, async (req, res) => {
             res.render('birds/session', {
                session,
                 birds,
+                seen,
                 location
             })
         }
