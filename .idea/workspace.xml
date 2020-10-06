@@ -19,7 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fff1d82-b51f-4a18-8f6a-8a911a288d8d" name="Default Changelist" comment="list of seen and unssen birds created">
+    <list default="true" id="6fff1d82-b51f-4a18-8f6a-8a911a288d8d" name="Default Changelist" comment="Modal updating number">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/birds.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/birds.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/birds/session.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/birds/session.hbs" afterDir="false" />
@@ -98,7 +98,7 @@
       <workItem from="1599922235448" duration="10426000" />
       <workItem from="1600004955728" duration="2506000" />
       <workItem from="1600954548782" duration="5618000" />
-      <workItem from="1601916499588" duration="5815000" />
+      <workItem from="1601916499588" duration="13326000" />
     </task>
     <task id="LOCAL-00001" summary="Ready to change for bird nerd">
       <created>1599404313855</created>
@@ -128,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601919109941</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Modal updating number">
+      <created>1601999459039</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1601999459039</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,7 +159,8 @@
     <MESSAGE value="Modal updated" />
     <MESSAGE value="Adding count to DB" />
     <MESSAGE value="list of seen and unssen birds created" />
-    <option name="LAST_COMMIT_MESSAGE" value="list of seen and unssen birds created" />
+    <MESSAGE value="Modal updating number" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modal updating number" />
   </component>
   <component name="WindowStateProjectService">
     <state x="0" y="224" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599331055489">
@@ -223,10 +231,10 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="544" y="606" key="VCS.EditChangelistDialog/0.23.1440.877@0.23.1440.877" timestamp="1601475777893" />
-    <state x="314" y="83" key="Vcs.Push.Dialog.v2" timestamp="1601919116078">
+    <state x="314" y="83" key="Vcs.Push.Dialog.v2" timestamp="1601999466615">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="314" y="83" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1601919116078" />
+    <state x="314" y="83" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1601999466615" />
     <state x="511" y="84" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1599404191938">
       <screen x="0" y="23" width="1440" height="877" />
     </state>

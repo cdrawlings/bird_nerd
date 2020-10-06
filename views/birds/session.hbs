@@ -14,19 +14,36 @@
 
                     <button type="button" id="{{speciesCode}}Count" class="btn btn-primary" data-toggle="modal" data-target="#{{speciesCode}}Modal">
                         {{count.count}}</button>
+                </div>
 
-                    <form action="/birds/create" method="POST" class="form-group add">
+                <div class="minuses">
+                    <div>{{speciesCode}}</div>
+
+                    <form action="/birds/minus/{{count.watchSession}}" method="POST" class="form-group">
+
                         <input type="hidden" name="_method" value="PUT">
                         <input type="number" name="count" value="{{count.count}}" id="{{speciesCode}}Minus">
-                        <input type="number" name="count" value="{{count.count}}" id="{{speciesCode}}Add">
-
+                        <label for="modal-input">ID</label> <input type="text" value="{{_id}}" id="modal-id" name="birdId">`
                         <button type="submit">
-                        <i class="fas fa-minus-circle"></i>
+                            <i class="fas fa-minus-circle"></i>
                         </button>
-
                     </form>
-                    <i id="{{speciesCode}}Minus" class="fas fa-plus-circle minus"></i>
                 </div>
+
+                <div class="adds">
+                    <div>{{speciesCode}}</div>
+
+                    <form action="/birds/minus/{{count.watchSession}}" method="POST" class="form-group">
+
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="number" name="count" value="{{count.count}}" id="{{speciesCode}}Add">
+                        <label for="modal-input">ID</label> <input type="text" value="{{_id}}" id="modal-id" name="birdId">`
+                        <button type="submit">
+                            <i class="fas fa-minus-circle"></i>
+                        </button>
+                    </form>
+                </div>
+
 
                 <!-- Modal -->
                 <div class="modal fade" id="{{speciesCode}}Modal" tabindex="-1" role="dialog" aria-labelledby="birdModalLabel" aria-hidden="true">
@@ -45,8 +62,10 @@
 <script>
 
     let elements = document.querySelectorAll('.spotted-birds');
-    let minus = document.querySelectorAll('.minus');
+    let minuses = document.querySelectorAll('.minuses');
     let code, name, count, title, modalCount, save, input;
+
+    console.log(minuses);
 
     // Opens modal to add updated count
     elements.forEach((element) => {
@@ -90,6 +109,28 @@
 
         });
     });
+
+
+    // Subtracts One to the number of spotted birds
+    minuses.forEach((minus) => {
+        minus.addEventListener('mousedown', (e) => {
+            let subtract;
+
+            subtract = minus.firstElementChild;
+            code = minus.firstElementChild.innerText;
+            count = document.getElementById(code + "Minus").value;
+
+            console.log("Subtract", subtract);
+            console.log("code", code);
+            console.log("count", count);
+
+            count--;
+            console.log("count 2", count);
+
+            document.getElementById(code + "Minus").value = count
+        });
+    });
+
 
 
 </script>
