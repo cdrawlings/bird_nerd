@@ -41,7 +41,7 @@ router.get('/session/:id', ensureAuth, async (req, res) => {
         const session = await Watch.findById(req.params.id).lean()
 
         const seen = await Bird.aggregate([
-            {$project: {name: 1, count: 1, _id: 1, user: 1}},
+            {$project: {comName: 1, speciesCode: 1, count: 1, _id: 1, user: 1}},
             {$match: {user: idUser} },
             {$unwind: '$count'},
             {$match: {'count.watchSession': idWatch} }
@@ -90,8 +90,37 @@ router.post('/add_bird', ensureAuth, async (req, res) => {
 
 
 // @desc    updates session with the new number of birds spotted
-// @route   POST /birds
-router.post('/update/:id', ensureAuth, async (req, res) => {
+// @route   put /birds
+router.put('/update/:id', ensureAuth, async (req, res) => {
+    console.log("req", req.body);
+    const update = await Bird.findOneAndUpdate(
+        {"_id": req.body.birdId, "count.watchSession": req.params.id},
+        {
+            $set: {"count.$.count": req.body.count }
+        }, {
+            new: true,
+            upsert: true,
+            rawResult: true
+        }
+    );
+    console.log("Update", update);
+    res.redirect('/birds/session/' + req.params.id)
+
+});
+
+
+// @desc    updates session with the new number of birds spotted
+// @route   put /birds
+router.put('/minus', ensureAuth, async (req, res) => {
+
+    res.send("Sent")
+
+});
+
+
+// @desc    Crestes new spooted bird watch seesion
+// @route   put /birds
+router.put('/create/:id', ensureAuth, async (req, res) => {
     console.log("req", req.body);
     const update = await Bird.findOneAndUpdate(
         {_id: req.body.birdId},

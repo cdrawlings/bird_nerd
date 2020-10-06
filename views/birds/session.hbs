@@ -1,21 +1,31 @@
-<div id="watchID">session._id</div>
+<div id="watchID">{{session._id}}</div>
 
 {{#if seen}}
     <ul>
         {{#each seen}}
             <li>
                 <div class="spotted-birds">
-                    <input id="{{speciesCode}}Code" type="text" value="{{speciesCode}}" name="code">
-                    <input type="text" value="{{comName}}" name="name" id="{{speciesCode}}Name">
-                    <input type="text" value="{{_id}}" name="birdID" id="{{speciesCode}}ID" Name">
+                    <div id="{{speciesCode}}Code">{{speciesCode}}</div>
+                    <div id="{{speciesCode}}Name">{{comName}}</div>
+                    <div id="{{speciesCode}}ID" >{{_id}}</div>
 
                     <a href="https://ebird.org/species/{{speciesCode}}/us" class="bird-name">{{comName}}</a>
                     <!-- Button trigger modal -->
 
-                    <button type="button" id="{{speciesCode}}Count" class="btn btn-primary" data-toggle="modal" data-target="#{{speciesCode}}Modal">0</button>
+                    <button type="button" id="{{speciesCode}}Count" class="btn btn-primary" data-toggle="modal" data-target="#{{speciesCode}}Modal">
+                        {{count.count}}</button>
 
-                    <i class="fas fa-plus-circle"></i>
-                    <i class="fas fa-minus-circle"></i>
+                    <form action="/birds/create" method="POST" class="form-group add">
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="number" name="count" value="{{count.count}}" id="{{speciesCode}}Minus">
+                        <input type="number" name="count" value="{{count.count}}" id="{{speciesCode}}Add">
+
+                        <button type="submit">
+                        <i class="fas fa-minus-circle"></i>
+                        </button>
+
+                    </form>
+                    <i id="{{speciesCode}}Minus" class="fas fa-plus-circle minus"></i>
                 </div>
 
                 <!-- Modal -->
@@ -30,111 +40,57 @@
 {{/if}}
 <h5>Unseen</h5>
 
-{{#if birds}}
-    <ul>
-        {{#each birds}}
-            <li>
-                <div class="spotted-birds">
-                    <input id="{{speciesCode}}Code" type="text" value="{{speciesCode}}" name="code">
-                    <input type="text" value="{{comName}}" name="name" id="{{speciesCode}}Name">
-                    <input type="text" value="{{_id}}" name="birdID" id="{{speciesCode}}ID" Name">
-
-                    <a href="https://ebird.org/species/{{speciesCode}}/us" class="bird-name">{{comName}}</a>
-                    <!-- Button trigger modal -->
-
-                    <button type="button" id="{{speciesCode}}Count" class="btn btn-primary" data-toggle="modal" data-target="#{{speciesCode}}Modal">0</button>
-
-                    <i class="fas fa-plus-circle"></i>
-                    <i class="fas fa-minus-circle"></i>
-                </div>
-
-                <!-- Modal -->
-                <div class="modal fade" id="{{speciesCode}}Modal" tabindex="-1" role="dialog" aria-labelledby="birdModalLabel" aria-hidden="true">
-                </div>
-            </li>
-        {{/each}}
-    </ul>
-
-{{else}}
-        <p>You have not spotted any birds</p>
-{{/if}}
-
-
 
 
 <script>
 
     let elements = document.querySelectorAll('.spotted-birds');
+    let minus = document.querySelectorAll('.minus');
     let code, name, count, title, modalCount, save, input;
 
+    // Opens modal to add updated count
     elements.forEach((element) => {
         element.addEventListener('mousedown', (e) => {
-            code = element.firstElementChild.value;
-            name = document.getElementById(code + "Name").value;
+            code = element.firstElementChild.innerText;
+            name = document.getElementById(code + "Name").innerText;
             count = document.getElementById(code + "Count");
-            id = document.getElementById(code + "ID").value;
+            id = document.getElementById(code + "ID").innerText;
             modalCount = document.getElementById('modal-count');
             modal = document.getElementById(code + "Modal");
 
-modal.innerHTML = `
- <div class="modal-dialog" role="document">
-      <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="birdModalLabel">${name}</h5>
+            modal.innerHTML = `
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="birdModalLabel">${name}</h5>
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 
+                <form action="/birds/update/{{session._id}}" method="POST" class="form-group">
+                 <input type="hidden" name="_method" value="PUT">
+                    <div class="modal-body" id="modal-count">
+                          <label for="modal-input">Enter birds spotted</label> <input type="text" value="${count.innerText}" id="modal-input" name="count">
+                          <label for="modal-input">Enter birds spotted</label> <input type="text" value="${code}" id="modal-code" name="code">
+                          <label for="modal-input">ID</label> <input type="text" value="${id}" id="modal-id" name="birdId">
+                    </div>
 
-<form action="/birds/update/{{session._id}}" method="POST" class="form-group">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="Submit" class="btn btn-primary" id="save-input">Save changes</button>
+                    </div>
+                </form>
 
-            <div class="modal-body" id="modal-count">
-              <label for="modal-input">Enter birds spotted</label> <input type="text" value="${count.innerText}" id="modal-input" name="count">
-              <label for="modal-input">Enter birds spotted</label> <input type="text" value="${code}" id="modal-code" name="code">
-<label for="modal-input">ID</label> <input type="text" value="${id}" id="modal-id" name="birdId">
+                </div>
+            </div>`
 
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="Submit" class="btn btn-primary" id="save-input">Save changes</button>
-            </div>
-</form>
-
-     </div>
- </div>`
-
- console.log("Modal", modal);
-            console.log("Code:", code);
-            console.log("name:", name);
-
-            console.log("Count:", count);
-            console.log("Modal Count:", modalCount);
-
-            save = document.getElementById('save-input');
-
-            console.log("count: ", count.innerText);
-
-
-
-            save.addEventListener('click', (e) => {
-                input = document.getElementById('modal-input');
-
-                console.log("m count: ", count);
-                count.innerText = input.value;
-
-                console.log(input.value);
-                console.log("i count: ", count);
-                console.log("save");
-
-
-
-            })
+            // Opens modal to create a new spooted bird session
 
         });
     });
+
 
 </script>
 
