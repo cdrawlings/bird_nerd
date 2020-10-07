@@ -109,7 +109,7 @@ router.put('/update/:id', ensureAuth, async (req, res) => {
 
 // @desc    Subtracts a bird counted from the session w
 // @route   put /birds
-router.put('/minus/:id', ensureAuth, async (req, res) => {
+router.put('/single/:id', ensureAuth, async (req, res) => {
     const update = await Bird.findOneAndUpdate(
         {"_id": req.body.birdId, "count.watchSession": req.params.id},
         {
@@ -120,13 +120,13 @@ router.put('/minus/:id', ensureAuth, async (req, res) => {
             rawResult: true
         });
 
-    res.redirect('/birds/session/' + req.params.id)
+   res.redirect('/birds/session/' + req.params.id)
 });
 
 
 
-// @desc    Crestes new spooted bird watch seesion
-// @route   put /birds
+// @desc    Crestes new spotted bird watch seesion
+// @route   put /birds/create
 router.put('/create/:id', ensureAuth, async (req, res) => {
     console.log("req", req.body);
     const update = await Bird.findOneAndUpdate(
