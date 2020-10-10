@@ -10,6 +10,16 @@
         <div id="b-latitude">{{location.latitude}}</div>
     </section>
 
+    {{#if message }}
+        <div class="alert alert-{{message.type}}">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h3>{{message.intro}}</h3>
+            {{message.message}}
+        </div>
+
+
+{{/if}}
+
     <div class="search card card-body">
         <h1>Recent birds</h1>
         <p class="lead">list of birds seen in the area ine the last 30 days</p>

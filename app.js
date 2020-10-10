@@ -6,6 +6,8 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const passport = require('passport');
 const session = require('express-session');
+const flash = require('express-flash')
+const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
 const connectDB = require('./config/db');
 
@@ -60,12 +62,16 @@ app.engine( '.hbs',
 );
 app.set('view engine', '.hbs');
 
+app.use(cookieParser());
+
+
+
 // Sessions
 app.use(session({
     secret: 'oodlesofbluenoodles',
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({mongooseConnection: mongoose.connection})
+    store: new MongoStore({mongooseConnection: mongoose.connection}),
 }));
 
 app.use(passport.initialize());
@@ -75,6 +81,8 @@ app.use(function (req, res, next) {
     res.locals.user = req.user || null;
     next();
 })
+
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
