@@ -119,6 +119,7 @@ router.get('/session/:id', ensureAuth, async (req, res) => {
 
 
 
+
 // @desc    Process add form
 // @route   POST /birds
 router.post('/add_bird', ensureAuth, flash, async (req, res) => {
@@ -161,7 +162,6 @@ router.put('/update/:id', ensureAuth, async (req, res) => {
 });
 
 
-
 // @desc    Subtracts a bird counted from the session w
 // @route   put /birds
 router.put('/single/:id', ensureAuth, async (req, res) => {
@@ -177,7 +177,6 @@ router.put('/single/:id', ensureAuth, async (req, res) => {
 
    res.redirect('/birds/session/' + req.params.id)
 });
-
 
 
 // @desc    Crestes new spotted bird watch seesion

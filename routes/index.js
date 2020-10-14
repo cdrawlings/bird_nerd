@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const {ensureAuth, ensureGuest} = require('../middleware/auth')
 
-const Story = require('../models/Story')
 const Location = require('../models/Location');
 const Watch = require('../models/WatchSession');
+const Bird = require('../models/Bird');
 
 // @Desc    Login/Landing Page
 // @route   GET/
@@ -18,11 +19,10 @@ router.get('/', ensureGuest, (req, res) => {
 // @route   GET/
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
-        const stories = await Story.find({user: req.user.id}).lean();
         const location = await Location.findOne({user: req.user.id}).lean();
+        const session = await Watch.findById(req.params.id).lean()
         res.render('dashboard', {
             name: req.user.firstName,
-            stories,
             location
         });
     } catch (err) {
@@ -30,6 +30,53 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
             res.render('errors/500');
     }
 });
+
+
+
+// @Desc    Get chart information
+// @route   GET/ chart
+router.get('/chart', ensureAuth, async (req, res) => {
+    let idUser = mongoose.Types.ObjectId(req.user.id)
+    // let idWatch = mongoose.Types.ObjectId(req.params.id)
+    try {
+        const location = await Location.findOne({user: req.user.id}).lean();
+        const session = await Watch.findById(req.params.id).lean()
+
+        const last = await Bird.aggregate([
+
+            {$match: {user: idUser} },
+            {$unwind: '$count'},
+            {$project: {comName: 1, speciesCode: 1, count: 1, _id: 1, user: 1}},
+            {$lookup: {
+                    from:"WatchSession",
+                    localField: "count.watchSession",
+                    foreignField: "_id",
+                    as: "watch"
+                }},
+
+
+            // {$match: {'count.watchSession': idWatch} }
+        ]);
+
+
+        res.render('chart', {
+            name: req.user.firstName,
+            location,
+            last
+        });
+
+        console.log("Last try: ", last)
+
+    } catch (err) {
+        console.error(err);
+        res.render('errors/500');
+    }
+});
+
+
+
+
+
 
 
 // @desc    Gets the users location
