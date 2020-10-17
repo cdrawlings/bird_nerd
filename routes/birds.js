@@ -134,7 +134,7 @@ router.post('/add_bird', ensureAuth, flash, async (req, res) => {
                     intro: 'Duplicate',
                     message: 'This bird has already been added to your list.'
                 }
-            res.redirect('/birds/add_birds')
+            res.render('/birds/add_birds')
         } else {
             console.error(err)
             res.render('errors/500')
@@ -156,9 +156,8 @@ router.put('/update/:id', ensureAuth, async (req, res) => {
             upsert: true,
             rawResult: true
         });
-
     //res.send("Sent", req.body.count )
-    res.redirect('/birds/session/' + req.params.id)
+    res.render('/birds/session/' + req.params.id)
 });
 
 
@@ -175,7 +174,7 @@ router.put('/single/:id', ensureAuth, async (req, res) => {
             rawResult: true
         });
 
-   res.redirect('/birds/session/' + req.params.id)
+   res.render('/birds/session/' + req.params.id)
 });
 
 
@@ -199,8 +198,7 @@ router.put('/create/:id', ensureAuth, async (req, res) => {
         }
     );
     console.log("Update", update);
-    res.redirect('/birds/session/' + req.params.id)
-
+    res.render('/birds/session/' + req.params.id)
 });
 
 

@@ -5,11 +5,12 @@ const dotenv = require('dotenv');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const passport = require('passport');
+const flash = require('connect-flash');
 const session = require('express-session');
-const flash = require('express-flash')
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
 const connectDB = require('./config/db');
+
 
 // Load config
 dotenv.config({ path: './config/config.env'});
@@ -64,18 +65,25 @@ app.set('view engine', '.hbs');
 
 app.use(cookieParser());
 
-
-
 // Sessions
 app.use(session({
     secret: 'oodlesofbluenoodles',
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     store: new MongoStore({mongooseConnection: mongoose.connection}),
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(flash());
+
+// Flash Glabal variables
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.errors_msg = req.flash('errors_msg');
+    next();
+});
 
 app.use(function (req, res, next) {
     res.locals.user = req.user || null;

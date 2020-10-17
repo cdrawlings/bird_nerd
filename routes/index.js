@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const passport = require('passport');
+const bcrypt =  require('bcryptjs');
 const {ensureAuth, ensureGuest} = require('../middleware/auth')
 
 const Location = require('../models/Location');
 const Watch = require('../models/WatchSession');
 const Bird = require('../models/Bird');
+const User = require('../models/User');
 
 // @Desc    Login/Landing Page
 // @route   GET/
@@ -16,7 +19,93 @@ router.get('/', ensureGuest, (req, res) => {
 });
 
 // @Desc    Login/Landing Page
-// @route   GET/
+// @route   GET/ login
+router.get('/login', ensureGuest, (req, res) => {
+    res.render('login', {
+        layout: "login"
+    })
+});
+
+router.post('/login', ensureGuest, (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/dashboard',
+        failureRedirect: '/login',
+        failureFlash: true
+    })(req, res, next);
+});
+
+// @desc    Gets the users location
+// @route   POST / location
+router.get('/register', ensureGuest, async (req, res) => {
+    res.render('register')
+});
+
+// @desc    REGISTERS THE USER
+// @route   Get / Registers
+router.post('/register', ensureGuest, async (req, res) => {
+    let {firstName, lastName, email, password, password2} = req.body;
+
+    let errors = [];
+
+    if (!firstName || !lastName || !email || !password || !password2) {
+        errors.push({msg: 'Please enter all fields'});
+    }
+
+    if (password != password2) {
+        errors.push({msg: 'Passwords do not match'});
+    }
+
+    if (password.length < 6) {
+        errors.push({msg: 'Password must be at least 6 characters'});
+    }
+    if (errors.length > 0) {
+        res.render('register', {
+            errors,
+            firstName,
+            lastName,
+            email,
+            password,
+            password2
+        });
+    } else {
+        User.findOne({email: email})
+            .then(user => {
+                if (user) {
+                    errors.push({msg: 'Email is already registered'});
+                    res.render('register', {
+                        errors,
+                        firstName,
+                        lastName,
+                        email,
+                        password,
+                        password2
+                    });
+                } else {
+                    console.log("Password 2: ", password, firstName)
+                    const newUser = new User({
+                        firstName,
+                        lastName,
+                        email,
+                        password
+                    });
+                    bcrypt.genSalt(10, (err, salt) =>
+                        bcrypt.hash(password, salt, (err, hash) => {
+                                if(err) throw err;
+                                newUser.password = hash;
+                                newUser.save()
+                                    .then(user => {
+                                        req.flash('success_msg', 'You are now regisitered');
+                                        res.redirect('/');
+                                    })
+                                    .catch(err => console.log(err));
+                    }))
+                }
+                    });
+                }
+            });
+
+// @Desc    Dashboard
+// @route   GET/ Dashboard
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
         const location = await Location.findOne({user: req.user.id}).lean();
@@ -30,8 +119,6 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
             res.render('errors/500');
     }
 });
-
-
 
 // @Desc    Get chart information
 // @route   GET/ chart
@@ -57,8 +144,6 @@ router.get('/chart', ensureAuth, async (req, res) => {
 
             // {$match: {'count.watchSession': idWatch} }
         ]);
-
-
         res.render('chart', {
             name: req.user.firstName,
             location,
@@ -73,12 +158,6 @@ router.get('/chart', ensureAuth, async (req, res) => {
     }
 });
 
-
-
-
-
-
-
 // @desc    Gets the users location
 // @route   POST / location
 router.post('/add_location', ensureAuth, async (req, res) => {
@@ -91,6 +170,8 @@ router.post('/add_location', ensureAuth, async (req, res) => {
         res.render('error/500')
     }
 });
+
+
 
 
 // @desc    Gets the users location
