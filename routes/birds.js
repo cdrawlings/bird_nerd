@@ -19,10 +19,27 @@ router.get('/', ensureAuth, async (req, res) => {
     })
 });
 
+// @Desc    type to get narroed selection of birds
+// @route   GET/birds/add_birds
 router.get('/add_birds', ensureAuth, flash, async (req, res) => {
     try {
         const location = await Location.findOne({user: req.user.id}).lean()
         res.render('birds/add_birds', {
+            name: req.user.firstName,
+            location
+        });
+    } catch (err) {
+        console.error(err)
+        res.render('error/500')
+    }
+});
+
+// @Desc    Displays full list of birds
+// @route   GET/birds/full_list
+router.get('/full_list', ensureAuth, flash, async (req, res) => {
+    try {
+        const location = await Location.findOne({user: req.user.id}).lean()
+        res.render('birds/full_list', {
             name: req.user.firstName,
             location
         });

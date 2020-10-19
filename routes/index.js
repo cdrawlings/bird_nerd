@@ -164,7 +164,7 @@ router.post('/add_location', ensureAuth, async (req, res) => {
     try {
         req.body.user = req.user.id
         await Location.create(req.body)
-        res.redirect('dashboard')
+        res.render('dashboard')
     } catch (err) {
         console.error(err)
         res.render('error/500')

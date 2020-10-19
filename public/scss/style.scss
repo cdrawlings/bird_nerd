@@ -1,5 +1,31 @@
+@import "color";
+@import "components";
+
+
+
+
+$font-stack: Raleway, Helvetica, Arial, sans-serif;
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  width: 100%;
+}
+
+body {
+  font-family: $font-stack;
+  line-height: 1.6rem;
+  color: $charcoal-color;
+  background-color: $base-color;
+}
+
 p {
   margin: .8rem 0;
+  color: $charcoal-color;
 }
 
 .login-container {
@@ -13,13 +39,5 @@ p {
   margin-right: 10px;
 }
 
-body {
-  margin: 0;
-}
 
 
-// Components
-// SHow bird list
-#bird-list {
-  display: none;
-}

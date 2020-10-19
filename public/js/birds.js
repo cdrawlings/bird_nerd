@@ -40,8 +40,8 @@ fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lon}`, requ
                             
                         <form method="POST" action="/birds/add_bird">
                            <div class="add-bird-btn">
-                               <input value="${bird.comName}" name="comName" >
-                               <input value="${bird.speciesCode}" name="speciesCode">
+                               <input type="hidden" value="${bird.comName}" name="comName" >
+                               <input type="hidden" value="${bird.speciesCode}" name="speciesCode">
                            </div>
                            <button type="submit" class="btn"><i class="fa fa-plus"></i></button>
                        </form>
@@ -54,8 +54,12 @@ fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lon}`, requ
         // FILTER THE LIST OF BIRDS REMOVING THE <li> OF THE BIRDS THAR DON'T MATCH THE FILTER
 
         let filterBird = document.getElementById('filterBird');
+        let fullBird = document.getElementById('full-list');
+
+        console.log(fullBird)
         // Add event listener
         if (filterBird) {
+
             filterBird.addEventListener('keyup', filterNames);
 
             function filterNames() {
@@ -81,10 +85,19 @@ fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lon}`, requ
                     }
                 }
             }
-        } else {
+        }
 
+        if (fullBird) {
+
+            fullBird.addEventListener('click', function () {
+                // Get value of input
+
+                console.log("hell0")
+
+                let ul = document.getElementById('bird-list');
+
+                document.getElementById('bird-list').style.display = "block"
+            })
         }
     })
     .catch(error => console.log('error', error));
-
-

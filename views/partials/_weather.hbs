@@ -1,23 +1,31 @@
-<div class="container-fluid bg-primary">
-    <section>
 
-        <div id="weather-bar">
-            <h3 id="w-loc">{{location.location}}</h3>
+<div class="wthr-bar">
 
-            <h3 id="w-string"></h3>
 
-<img id="w-icon"/>
-            <h3 class="tex-dark" id="w-desc"></h3>
+    <section class="container ">
+        <div class="row weather">
 
-            <h3 id="w-lon">{{location.longitude}}</h3>
-            <h3 id="w-lat">{{location.latitude}}</h3>
+            <div id="w-loc" class="wthr-city">{{location.location}}</div>
+
+            <div id="w-string" class="wthr-info"></div>
+
+            <img id="w-icon" class="wthr-icon" alt="weather icon" />
+
+            <div class="wthr-info" id="w-desc"></div>
+
+            <h3 id="w-lon" class="wthr-cord">{{location.longitude}}</h3>
+            <h3 id="w-lat" class="wthr-cord">{{location.latitude}}</h3>
 
         </div>
 
+<!-- HIDE THE CHANGE LOCATION BUTTON
 
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#locModal">
             Change Location
         </button>
+
+-->
+
     </section>
 
 

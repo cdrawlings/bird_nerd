@@ -2,54 +2,28 @@
 
 <h6>Dashboard</h6>
 
-{{name}}
-{{location.longitude}}
-{{location.latitude}}
+Welcome, {{name}}! Are you ready to bird watch?]
 
 {{#if location}}
 
 <!-- if there is location information show Bird -->
 
-    {{#if stories}}
-        <table class="striped">
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each stories}}
-                <tr>
-                    <td><a href="/stories/{{_id}}">{{title}}</a></td>
-                    <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
-                    <td><span class"dash-stories">{{status}}</span></td>
-                    <td width="200px">
-                        <a href="/stories/edit/{{_id}}" class="btn btn-float">
-                            <i class="fas fa-edit"></i>
-                        </a>
 
-                        <form action="/stories/{{_id}}" method="POST" id="delete">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn"><i class="fas fa-trash"></i></button>
-                        </form>
+<form action="start" method="POST" class="form-group">
+    <input type="hidden" id="tempature" aria-hidden="true" value="" name="tempature">
+    <input type="hidden" id="condition" aria-hidden="true" value="" name="condition">
+    <input type="hidden" id="local" aria-hidden="true" value="{{location._id}}" name="local">
+
+
+    <input type="submit" value="Start Session">
+</form>
 
 
 
-                    </td>
-                </tr>
-            {{/each}}
-            </tbody>
-        </table>
-    {{else}}
-        <p>You have not created any stories</p>
-    {{/if}}
 
 {{else}}
 
-    <!-- if  there is NO location information get location -->
+    <!-- First time logging in  or if  there is NO location information get location -->
 
     <form action="/add_location" method="POST" class="form-group">
         <div class="get-location row">
@@ -77,14 +51,5 @@
 
 {{/if}}
 
-
-<form action="start" method="POST" class="form-group">
-    <input type="text" id="tempature" aria-hidden="true" value="" name="tempature">
-    <input type="text" id="condition" aria-hidden="true" value="" name="condition">
-    <input type="text" id="local" aria-hidden="true" value="{{location._id}}" name="local">
-
-
-    <input type="submit" value="Start Session">
-</form>
 
 <script src="/js/location.js"></script>
