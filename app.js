@@ -17,6 +17,7 @@ dotenv.config({ path: './config/config.env'});
 
 require('./config/passport')(passport);
 
+
 connectDB();
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan())
@@ -25,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
 const app = express();
 
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json(
     {
         type: ['application/json', 'text/plain']

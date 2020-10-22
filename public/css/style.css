@@ -47,28 +47,94 @@
   color: #6e7e85;
 }
 
+.adds {
+  display: flex;
+  align-content: center;
+  height: 2rem;
+}
+
 #bird-list {
   display: none;
+}
+
+.spotted-birdsU {
+  margin-right: 40px;
+  display: flex;
+  align-items: center;
+  height: 2rem;
+}
+
+.name-box {
+  display: flex;
+  width: 600px;
+  margin-right: 40px;
+}
+
+.watch-list {
+  list-style: none;
+  display: flex;
+}
+.watch-list a:link {
+  text-decoration: none;
+  color: #435360;
+}
+.watch-list a:hover {
+  text-decoration: none;
+  font-weight: 800;
+  color: #BF980D;
 }
 
 .bird-name {
   width: 300px;
 }
 
-.bird-btn {
-  padding: 10px 20px;
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.bird-btn-start, .bird-btn-sm {
   background-color: #710a2c;
-  border-color: #6e7e85;
+  border-color: #435360;
   border-radius: 5px;
   color: #f5f6f4;
   font-weight: 800;
   font-size: 1rem;
+}
+
+.bird-btn-sm {
+  padding: 5px 10px;
+  border: 0;
+}
+.bird-btn-sm:hover {
+  background-color: #BF980D;
+  padding: 5px 10px;
+  border: 0;
+}
+
+.bird-btn-start {
+  padding: 10px 20px;
   width: 200px;
+}
+
+.sub-button {
+  border: 0;
+  margin-left: 40px;
 }
 
 .search-box {
   display: flex;
   align-items: flex-end;
+}
+
+.fa-plus-circle {
+  font-size: 1.5rem;
+  color: #710a2c;
+  vertical-align: center;
+  padding-top: 2px;
+}
+.fa-plus-circle:hover {
+  color: #BF980D;
 }
 
 .search-bar {
@@ -80,12 +146,23 @@
   margin-top: 2rem;
 }
 
+.hide {
+  display: none;
+}
+
 .loc-info {
   display: none;
 }
 
 .fa-plus:hover {
   color: #BF980D;
+}
+
+.spotted {
+  margin-top: 2rem;
+}
+.spotted ul li {
+  list-style: none;
 }
 
 .all-bird-list {
@@ -109,6 +186,14 @@
   color: #6e7e85;
 }
 
+.spotted-birds {
+  display: flex;
+}
+
+.spotted-list {
+  display: flex;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -117,6 +202,10 @@
 
 img {
   width: 100%;
+}
+
+li {
+  text-decoration: none;
 }
 
 body {

@@ -19,18 +19,21 @@
     {{/if}}
 
 
-        <h1>Recent birds</h1>
-        <p class="lead">Birds seen in {{location.location}} during the last 30 days</p>
-<div class="search-box">
+    <h1>Recent birds</h1>
+    <p class="lead">Birds seen in {{location.location}} during the last 30 days</p>
+    <div class="search-box">
         <input type="text" id="filterBird" class="form-control search-bar" placeholder="Bird Name">
 
-        <button class="bird-btn">Full List</button>
-</div>
+        <button class="bird-btn-start" id="full-list">Full List</button>
+    </div>
 
 
     <br>
     <div id="bird-list">
     </div>
+
+
+
 
 </div>
 

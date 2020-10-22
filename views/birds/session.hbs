@@ -1,13 +1,14 @@
-<div id="watchID">{{session._id}}</div>
+
+<div id="watchID" class="hide">{{session._id}}</div>
 
 {{#if seen}}
     <ul>
         {{#each seen}}
             <li>
                 <div class="spotted-birds">
-                    <div id="{{speciesCode}}Code">{{speciesCode}}</div>
-                    <div id="{{speciesCode}}Name">{{comName}}</div>
-                    <div id="{{speciesCode}}ID" >{{_id}}</div>
+                    <div id="{{speciesCode}}Code" class="hide">{{speciesCode}}</div>
+                    <div id="{{speciesCode}}Name" class="hide">{{comName}}</div>
+                    <div id="{{speciesCode}}ID" class="hide">{{_id}}</div>
 
                     <a href="https://ebird.org/species/{{speciesCode}}/us" class="bird-name">{{comName}}</a>
                     <!-- Button trigger modal -->
@@ -42,7 +43,7 @@
                         <label for="modal-input">ID</label> <input type="text" value="{{_id}}" id="{{speciesCode}}modal-idA" name="birdId">
 
                         <button type="submit">
-                            <i class="fas fa-plus-circle"></i>
+                            +1
                         </button>
 
                     </form>
@@ -58,36 +59,40 @@
 {{else}}
     <p>You have not spotted any birds</p>
 {{/if}}
-<h5>Unseen</h5>
 
+<h5>Unseen</h5>
 
 {{#if birds}}
     <ul>
         {{#each birds}}
-            <li>
+            <li class="watch-list">
+
+
+
                 <div class="spotted-birdsU">
+
                     <div id="{{speciesCode}}CodeU">{{speciesCode}}</div>
                     <div id="{{speciesCode}}NameU">{{comName}}</div>
-                    <div id="{{speciesCode}}IDU" >{{_id}}</div>
+                    <div id="{{speciesCode}}IdU">{{_id}}</div>
 
                     <a href="https://ebird.org/species/{{speciesCode}}/us" class="bird-name">{{comName}}</a>
                     <!-- Button trigger modal -->
 
-                    <button type="button" id="{{speciesCode}}CountU" class="btn btn-primary" data-toggle="modal" data-target="#{{speciesCode}}ModalU">
-                      0</button>
+                    <button type="button" id="{{speciesCode}}CountU" class="bird-btn-sm btn-primary" data-toggle="modal" data-target="#{{speciesCode}}ModalU">
+                        0</button>
                 </div>
 
-                <div class="adds">
+                <div class="plusOne">
                     <div>{{speciesCode}}</div>
 
-                    <form action="/birds/single/{{count.watchSession}}" method="POST" class="form-group">
+                    <form action="/birds/create/{{session._id}}" method="POST" class="form-group">
                         <input type="hidden" name="_method" value="PUT">
 
-                        <input type="number" name="count" value="{{count.count}}" id="{{speciesCode}}AddU">
-                        <label for="modal-input">ID</label> <input type="text" value="{{_id}}" id="{{speciesCode}}modal-id" name="birdId">
+                       <input type="number" name="count" value="0" id="{{speciesCode}}Plus">
+                       <input type="text" value="{{_id}}" id="{{speciesCode}}IdP" name="birdId">
 
-                        <button type="submit">
-                            <i class="fas fa-plus-circle"></i>
+                        <button type="submit" class="">
+                            +1
                         </button>
 
                     </form>
@@ -96,6 +101,7 @@
                 <!-- Modal -->
                 <div class="modal fade" id="{{speciesCode}}ModalU" tabindex="-1" role="dialog" aria-labelledby="birdModalLabelU" aria-hidden="true">
                 </div>
+
             </li>
         {{/each}}
     </ul>
@@ -105,23 +111,29 @@
 {{/if}}
 
 
+
+
 <script>
 
     let elements = document.querySelectorAll('.spotted-birds');
     let elementsU = document.querySelectorAll('.spotted-birdsU');
     let minuses = document.querySelectorAll('.minuses');
     let adds = document.querySelectorAll('.adds');
-    let code, name, count, title, modalCount, save, input;
+    let pluses = document.querySelectorAll('.plusOne');
+    let sessionId = document.getElementById('watchID').innerText;
 
-    console.log(minuses);
+
+    console.log(sessionId)
 
     // Opens modal to add updated count
     elements.forEach((element) => {
         element.addEventListener('mousedown', (e) => {
+            let code, name, count, modalCount, modal, id;
+
             code = element.firstElementChild.innerText;
             name = document.getElementById(code + "Name").innerText;
             count = document.getElementById(code + "Count");
-            id = document.getElementById(code + "ID").innerText;
+            id = document.getElementById(code + "ID").innerText; // Bird Modal id
             modalCount = document.getElementById('modal-count');
             modal = document.getElementById(code + "Modal");
 
@@ -158,22 +170,58 @@
         });
     });
 
+    // Subtracts One to the number of spotted birds
+    minuses.forEach((minus) => {
+        minus.addEventListener('mousedown', (e) => {
+            let subtract;
+
+            subtract = minus.firstElementChild;
+            code = subtract.innerText;
+            count = document.getElementById(code + "Minus").value;
+
+            console.log("Code", subtract)
+            console.log("Code", code)
+            console.log("Count 1", count)
+            count--;
+            console.log("Count 2", count)
+            document.getElementById(code + "Minus").value = count
+        });
+    });
+
+    // Adds One to the number of spotted birds
+    adds.forEach((add) => {
+        add.addEventListener('mousedown', (e) => {
+            let addition;
+
+            addition = add.firstElementChild;
+            code = addition.innerText;
+            count = document.getElementById(code + "Add").value;
+
+            console.log("Code", addition)
+            console.log("Code", code)
+            console.log("Count 1", count)
+            count++;
+
+            document.getElementById(code + "Add").value = count
+            console.log("Count 2", count)
+        });
+    });
+
     // Opens modal to add bird to seen list
     elementsU.forEach((element) => {
         element.addEventListener('mousedown', (e) => {
+            let code, name, count, modalCount, modal, id;
+
             code = element.firstElementChild.innerText;
+
             name = document.getElementById(code + "NameU").innerText;
+
             count = document.getElementById(code + "CountU").innerText;
-            id = document.getElementById(code + "IDU").innerText;
+
+            id = document.getElementById(code + "IdU").innerText; // Bird Modal id
+
             modalCount = document.getElementById('modal-count');
             modal = document.getElementById(code + "ModalU");
-
-            console.log('Code: ', code);
-            console.log('Name: ', name);
-            console.log('Count: ', count);
-            console.log('Id: ', id);
-
-
 
             modal.innerHTML = `
             <div class="modal-dialog" role="document">
@@ -208,42 +256,42 @@
         });
     });
 
+    // Adds One to the number of spotted birds
+    pluses.forEach((plus) => {
+        plus.addEventListener('mousedown', (e) => {
+            let addition, code, count, birdId;
 
-    // Subtracts One to the number of spotted birds
-    minuses.forEach((minus) => {
-        minus.addEventListener('mousedown', (e) => {
-            let subtract;
-
-            subtract = minus.firstElementChild;
-            code = subtract.innerText;
-            count = document.getElementById(code + "Minus").value;
-
-            console.log("Code", subtract)
-            console.log("Code", code)
-            console.log("Count 1", count)
-            count--;
-            console.log("Count 2", count)
-            document.getElementById(code + "Minus").value = count
-        });
-    });
-
-    // SAdds One to the number of spotted birds
-    adds.forEach((add) => {
-        add.addEventListener('mousedown', (e) => {
-            let addition;
-
-            addition = add.firstElementChild;
+            addition = plus.firstElementChild;
+            form = addition.nextElementSibling;
             code = addition.innerText;
-            count = document.getElementById(code + "Add").value;
+            console.log("Code: ", code);
+            count = document.getElementById(code + "Plus").value;
+            console.log("Count: ", count)
+            birdId = document.getElementById(code + "IdP").value;
+            count++
 
-            console.log("Code", addition)
-            console.log("Code", code)
+            document.getElementById(code + "Plus").value = count
+
+            console.log("Count 2: ", count)
+
+            form.action = `/birds/create/${sessionId}`;
+
             console.log("Count 1", count)
+            console.log("Bird Id", birdId)
+
+
+
             count++;
             console.log("Count 2", count)
-            document.getElementById(code + "Add").value = count
+
+            count.value = count
         });
     });
 
-</script>
 
+
+
+
+
+
+</script>

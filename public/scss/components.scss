@@ -56,28 +56,106 @@
 
 
 // Show bird list
+.adds {
+  display: flex;
+  align-content: center;
+  height: 2rem;
+}
+
 #bird-list {
   display: none;
+}
+
+.spotted-birdsU {
+  margin-right: 40px;
+  display: flex;
+  align-items: center;
+
+  height: 2rem;
+}
+
+.name-box {
+  display: flex;
+  width: 600px;
+  margin-right: 40px;
+}
+
+.watch-list {
+  list-style: none;
+  display: flex;
+
+  a:link {
+    text-decoration: none;
+    color: $charcoal-color;
+  }
+
+
+  a:hover {
+    text-decoration: none;
+    font-weight: 800;
+    color: $drk-hover
+
+  }
+
 }
 
 .bird-name {
   width: 300px;
 }
 
-.bird-btn {
-  padding: 10px 20px;
+.flex-center{
+  display: flex;
+  align-items: center;
+}
+
+%bird-btn {
   background-color: $primary-color;
-  border-color: $slate-gray-color;
+  border-color: $charcoal-color;
   border-radius: 5px;
   color: $base-color;
   font-weight: 800;
   font-size: 1rem;
+}
+
+.bird-btn-sm {
+  @extend %bird-btn;
+  padding: 5px 10px;
+  border: 0;
+
+  &:hover {
+    background-color: $drk-hover;
+    padding: 5px 10px;
+    border: 0;
+  }
+}
+
+.bird-btn-start {
+  @extend %bird-btn;
+  padding: 10px 20px;
   width: 200px;
+}
+
+.sub-button {
+  border: 0;
+  margin-left: 40px;
+
 }
 
 .search-box {
   display: flex;
   align-items: flex-end;
+}
+
+.fa-plus-circle {
+  font-size: 1.5rem;
+  color:$primary-color;
+  vertical-align: center;
+  padding-top: 2px;
+
+  &:hover {
+    color: $drk-hover;
+
+  }
 }
 
 .search-bar {
@@ -89,6 +167,10 @@
   margin-top: 2rem;
 }
 
+.hide {
+  display: none;
+}
+
 .loc-info {
   display: none;
 }
@@ -97,6 +179,18 @@
 
   &:hover {
     color: $drk-hover;
+
+  }
+}
+
+.spotted {
+  margin-top: 2rem;
+
+  ul {
+
+    li {
+      list-style: none;
+    }
 
   }
 }
@@ -123,6 +217,16 @@
     }
   }
 }
+
+.spotted-birds {
+  display: flex;
+}
+
+.spotted-list {
+  display: flex;
+}
+
+
 
 
 

@@ -183,17 +183,15 @@ router.post('/start', ensureAuth, async (req, res) => {
         session.tempature = req.body.tempature;
         session.condition = req.body.condition;
         session.local = req.body.local;
-        console.log(session)
         session.save(function(err, start) {
             if(err) {
                 console.log(err);
             }
             else {
-                console.log("Saved: ", start.id)
+                console.log("Session starteed: ")
             }
         });
         res.redirect('birds/session/' + session.id)
-        console.log("session: ", session.id)
     } catch (err) {
         console.error(err)
         res.render('error/500')
