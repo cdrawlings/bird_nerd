@@ -10,6 +10,28 @@
 
     <!-- if there is location information show Bird -->
 
+    <h5>Your birds</h5>
+
+    {{#if birds}}
+
+            <ul>
+                {{#each birds}}
+                    <li class="watch-list">
+
+                        <a href="https://ebird.org/species/{{speciesCode}}/us" class="bird-name">{{comName}}</a>
+                        {{watch.startTime}}, {{watchSession}}
+                    </li>
+                {{/each}}
+            </ul>
+
+    {{else}}
+
+    {{/if}}
+
+
+    <h5>Your bird watching sesion</h5>
+
+
 
 {{else}}
 
@@ -50,5 +72,9 @@
 
     <input type="submit" value="Start Session">
 </form>
+
+
+
+
 
 <script src="/js/location.js"></script>

@@ -40,7 +40,7 @@
                 <div class="minuses">
                     <div class="hide">{{speciesCode}}</div>
 
-                    <form action="/birds/single/{{count.watchSession}}" method="POST" class="form-group">
+                    <form action="/birds/update/{{count.watchSession}}" method="POST" class="form-group">
                         <input type="hidden" name="_method" value="PUT">
 
                         <input type="hidden" name="count" value="{{count.count}}" id="{{speciesCode}}Minus">
@@ -122,7 +122,9 @@
 
 </div>
 </div>
+
 </div>
+
 
 
 <script>

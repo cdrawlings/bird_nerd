@@ -150,23 +150,16 @@ router.post('/add_bird_session/:id', ensureAuth, flash, async (req, res) => {
 
 
 
-// @desc    Subtracts a bird counted from the session w
+// @desc    show information for a single bird
 // @route   put /birds
 router.put('/single/:id', ensureAuth, async (req, res) => {
-    const update = await Bird.findOneAndUpdate(
-        {"_id": req.body.birdId, "count.watchSession": req.params.id},
-        {
-            $set: {"count.$.count": req.body.count }
-        }, {
-            new: true,
-            upsert: true,
-            rawResult: true
-        });
-console.log("trying")
-    res.redirect('/birds/session/' + req.params.id);
+    const birds = await Bird.aggregate([
+        {$project: {comName: 1, speciesCode: 1, count: 1, _id: 1, user: 1, 'count.count': 1, 'count.watchSession.startTime': 1}},
+        {$match: {user: idUser} },
+        {$match: {'count.watchSession': idWatch} }
+
+    ]);
 });
-
-
 
 
 // @desc    updates session with the new number of birds spotted
@@ -184,6 +177,7 @@ router.put('/update/:id', ensureAuth, async (req, res) => {
     //res.send("Sent", req.body.count )
     res.redirect('/birds/session/' + req.params.id)
 });
+
 
 // @desc    Creates new spotted bird watch seesion
 // @route   put /birds/create

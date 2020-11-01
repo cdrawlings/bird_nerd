@@ -26,6 +26,8 @@ router.get('/login', ensureGuest, (req, res) => {
     })
 });
 
+// @desc    Authenticate login
+// @route   POST / Login
 router.post('/login', ensureGuest, (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/dashboard',
@@ -104,6 +106,7 @@ router.post('/register', ensureGuest, async (req, res) => {
                 }
             });
 
+
 // @Desc    Dashboard
 // @route   GET/ Dashboard
 router.get('/dashboard', ensureAuth, async (req, res) => {
@@ -120,6 +123,9 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
     }
 });
 
+
+
+
 // @Desc    Get chart information
 // @route   GET/ chart
 router.get('/chart', ensureAuth, async (req, res) => {
@@ -127,25 +133,27 @@ router.get('/chart', ensureAuth, async (req, res) => {
     // let idWatch = mongoose.Types.ObjectId(req.params.id)
     try {
         const location = await Location.findOne({user: req.user.id}).lean();
-        const session = await Watch.findById(req.params.id).lean()
 
-        const last = await Bird.aggregate([
-
+        const birds = await Bird.aggregate([
             {$match: {user: idUser} },
+            {$project: {_id: 1, user: 1, comName: 1, 'count': 1, 'startTime': 1 }},
             {$unwind: '$count'},
-            {$project: {comName: 1, speciesCode: 1, count: 1, _id: 1, user: 1}},
             {$lookup: {
-                    from:"WatchSession",
+                    from: "watchsessions",
                     localField: "count.watchSession",
                     foreignField: "_id",
                     as: "watch"
                 }},
+            {$unwind: '$watch'},
+
 
         ]);
+        console.log(birds)
+
         res.render('chart', {
             name: req.user.firstName,
             location,
-            last
+            birds,
         });
 
 

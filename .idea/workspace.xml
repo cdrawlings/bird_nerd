@@ -20,24 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fff1d82-b51f-4a18-8f6a-8a911a288d8d" name="Default Changelist" comment="Addition updating">
-      <change afterPath="$PROJECT_DIR$/public/js/addSession.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/birdSearch.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/partials/_add_button.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/partials/_search_bar.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/birds.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/birds.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_color.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/scss/_color.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/components.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/scss/_components.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/scss/style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/birds.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/birds.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/birds/add_birds.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/birds/add_birds.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/birds/full_list.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/birds/add_bird_session.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/birds/session.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/birds/session.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/birds/session.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/main.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/chart.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/chart.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +123,7 @@
       <workItem from="1603634365290" duration="11768000" />
       <workItem from="1603725328495" duration="16506000" />
       <workItem from="1603918204822" duration="120000" />
-      <workItem from="1603982425350" duration="21558000" />
+      <workItem from="1603982425350" duration="33305000" />
     </task>
     <task id="LOCAL-00001" summary="Ready to change for bird nerd">
       <created>1599404313855</created>
@@ -208,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603387304789</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Ad bird from session working">
+      <created>1604241468800</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1604241468800</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,7 +232,8 @@
     <MESSAGE value="local sign in added to log in process" />
     <MESSAGE value="Some CSS added, add bird finished" />
     <MESSAGE value="Adding bird count fuuly works" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding bird count fuuly works" />
+    <MESSAGE value="Ad bird from session working" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ad bird from session working" />
   </component>
   <component name="WindowStateProjectService">
     <state x="229" y="224" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603905552384">
@@ -317,10 +312,10 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="544" y="606" key="VCS.EditChangelistDialog/0.23.1440.877@0.23.1440.877" timestamp="1601475777893" />
-    <state x="314" y="83" key="Vcs.Push.Dialog.v2" timestamp="1603387311737">
+    <state x="314" y="83" key="Vcs.Push.Dialog.v2" timestamp="1604241473695">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="314" y="83" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1603387311737" />
+    <state x="314" y="83" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1604241473695" />
     <state x="511" y="84" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1599404191938">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -356,12 +351,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/index.js</url>
-          <line>15</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/routes/index.js</url>
-          <line>159</line>
+          <line>166</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -370,10 +360,10 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/routes/birds.js</url>
-          <line>173</line>
+          <url>file://$PROJECT_DIR$/routes/index.js</url>
+          <line>46</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="7" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
