@@ -4,7 +4,6 @@ lon = document.getElementById('b-longitude').innerText;
 
 console.log("pre-Lat: ", lat)
 
-
 lat = Math.round(lat*1e2)/1e2;
 lon = Math.round(lon*1e2)/1e2;
 
@@ -33,19 +32,54 @@ fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lon}`, requ
 
         birds.forEach((bird) => {
             output +=
-                `
-                     <li class="all-bird-list list-group-item">
+                `<li class="list-group-item sesh-bird">
+   <div id="${bird.speciesCode}Code">${bird.speciesCode}</div>
+
                          <a class="bird-name ${bird.speciesCode}" href="https://ebird.org/species/${bird.speciesCode}/US">
                             ${bird.comName}</a> 
-                            
-                        <form method="POST" action="/birds/add_bird">
-                           <div class="add-bird-btn">
-                               <input type="hidden" value="${bird.comName}" name="comName" >
-                               <input type="hidden" value="${bird.speciesCode}" name="speciesCode">
-                           </div>
-                           <button type="submit" class="btn"><i class="fa fa-plus"></i></button>
-                       </form>
-                    </li>
+
+                         <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#${bird.speciesCode}SeshModal">
+                                Add bird
+                         </button>
+                         
+                         
+ 
+  
+  
+<!-- Modal -->
+<div class="modal fade" id="${bird.speciesCode}SeshModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">${bird.comName}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+      </div>
+              <div class="modal-body" id="${bird.speciesCode}ModalBody">
+                    <form action="" method="POST" class="form-group">
+                   
+                    
+                    <input type="text" name="watchSession" value="Hello" id="${bird.speciesCode}Id">
+                     <input type="text" name="id" value="${bird.comName}">
+                     <input type="text" name="comName" value="${bird.comName}">
+                      <input type="text" name="speciesCode" value="${bird.speciesCode}">
+                       <label for="">Number spotted</label>
+                    <input type="Number" name="count" value="0">
+                    <button type="Submit" class="btn btn-primary">Add Bird</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      
+                   
+                 </form>
+              </div>
+      
+    </div>
+  </div>
+</div>
+            
+         
+</li>
                  `
         });
 
@@ -55,6 +89,8 @@ fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lon}`, requ
 
         let filterBird = document.getElementById('filterBird');
         let fullBird = document.getElementById('full-list');
+        let fullSearchBird = document.getElementById('full-search-list');
+        let closeSearchBird = document.getElementById('show-list');
 
         // Add event listener
         if (filterBird) {
@@ -71,7 +107,7 @@ fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lon}`, requ
                 document.getElementById('bird-list').style.display = "block"
 
                 // Get lis from ul
-                let li = ul.querySelectorAll('li.all-bird-list');
+                let li = ul.querySelectorAll('li.sesh-bird');
 
                 // Loop through collection-item lis
                 for (let i = 0; i < li.length; i++) {
@@ -94,21 +130,6 @@ fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lon}`, requ
             })
         }
 
-        if (fullSearchBird) {
-
-          fullSearchBird.addEventListener('click', e => {
-                document.getElementById('show-list').style.display = "block"
-                document.getElementById('bird-list').style.display = "block"
-            })
-        }
-
-        if (closeSearchBird) {
-
-            closeSearchBird.addEventListener('click', e => {
-                document.getElementById('show-list').style.display = "none"
-                document.getElementById('bird-list').style.display = "none"
-            })
-        }
 
     })
     .catch(error => console.log('error', error));

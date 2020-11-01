@@ -1,3 +1,21 @@
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function darken($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
 // Weather Bar
 
 %wthr {
@@ -59,36 +77,36 @@
 .adds {
   display: flex;
   align-content: center;
-  height: 2rem;
 }
 
 #bird-list {
   display: none;
 }
 
+#show-list {
+  display: none;
+}
+
 .spotted-birdsU {
-  margin-right: 40px;
   display: flex;
   align-items: center;
-
   height: 2rem;
 }
 
 .name-box {
   display: flex;
   width: 600px;
-  margin-right: 40px;
 }
 
 .watch-list {
   list-style: none;
   display: flex;
+  margin-bottom: 3px;
 
   a:link {
     text-decoration: none;
     color: $charcoal-color;
   }
-
 
   a:hover {
     text-decoration: none;
@@ -96,7 +114,6 @@
     color: $drk-hover
 
   }
-
 }
 
 .bird-name {
@@ -113,14 +130,15 @@
   border-color: $charcoal-color;
   border-radius: 5px;
   color: $base-color;
-  font-weight: 800;
-  font-size: 1rem;
+  font-weight: 600;
 }
 
 .bird-btn-sm {
   @extend %bird-btn;
   padding: 5px 10px;
   border: 0;
+  font-size: .9rem;
+  margin-right: 40px;
 
   &:hover {
     background-color: $drk-hover;
@@ -133,12 +151,44 @@
   @extend %bird-btn;
   padding: 10px 20px;
   width: 200px;
+  font-size: .9rem;
+  font-weight: 800;
 }
 
-.sub-button {
-  border: 0;
-  margin-left: 40px;
+.bird-btn-box {
+  @extend %bird-btn;
+  width: 75px;
+  font-size: .8rem;
+}
 
+.add-btn {
+  @extend %bird-btn;
+  background-color: $add-button;
+  padding: 5px 7px;
+  border: 0;
+  font-size: .9rem;
+  margin-right: 20px;
+
+  &:hover {
+    background-color: $drk-hover;
+    padding: 5px 7px;
+    border: 0;
+  }
+}
+
+.sub-btn {
+  @extend %bird-btn;
+  background-color: $sub-button;
+  padding: 5px 7px;
+  border: 0;
+  font-size: .9rem;
+  margin-right: 20px;
+
+  &:hover {
+    background-color: $drk-hover;
+    padding: 5px 7px;
+    border: 0;
+  }
 }
 
 .search-box {
@@ -159,12 +209,18 @@
 }
 
 .search-bar {
-  width: 400px;
+  width: 200px;
   margin-right: 40px;
 }
 
 .search-container {
   margin-top: 2rem;
+}
+
+.search-bar-container {
+  background-color: tint($primary-color, 80%);
+  width: 100%;
+  padding: 5px;
 }
 
 .hide {
@@ -220,11 +276,59 @@
 
 .spotted-birds {
   display: flex;
+  align-items: center;
+
 }
 
 .spotted-list {
   display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+
+  a{
+    color: $charcoal-color;
+  }
+
+  a:link {
+    text-decoration: none;
+    color: $charcoal-color;
+  }
+
+  a:hover {
+    text-decoration: none;
+    font-weight: 800;
+    color: $drk-hover
+  }
+
+  a:visted {
+    text-decoration: none;
+    color: $charcoal-color;
+  }
 }
+
+.bird-bar {
+  background-color: tint($primary-color, 20%);
+}
+
+.search-box-bar {
+  width: 200pc;
+  display: flex;
+  align-items: center;
+  padding-top: 2px;
+}
+
+.session-add-btn {
+  padding: 2px 40px;
+  background-color: $primary-color;
+  color: $base-color;
+  border-radius: 5px;
+  border: none;
+  font-weight: 800;
+  font-size: .9rem;
+  margin: 2px auto;
+}
+
+
 
 
 

@@ -19,7 +19,7 @@ router.get('/', ensureAuth, async (req, res) => {
     })
 });
 
-// @Desc    type to get narroed selection of birds
+// @Desc    type to get list of birds
 // @route   GET/birds/add_birds
 router.get('/add_birds', ensureAuth, flash, async (req, res) => {
     try {
@@ -34,31 +34,11 @@ router.get('/add_birds', ensureAuth, flash, async (req, res) => {
     }
 });
 
-/*
-
-
-// @Desc    Displays full list of birds
-// @route   GET/birds/full_list
-router.get('/full_list', ensureAuth, flash, async (req, res) => {
-    try {
-        const location = await Location.findOne({user: req.user.id}).lean()
-        res.render('birds/full_list', {
-            name: req.user.firstName,
-            location
-        });
-    } catch (err) {
-        console.error(err)
-        res.render('error/500')
-    }
-});
-
- */
 
 
 
-
-// @Desc    Login/Landing Page
-// @route   GET/
+// @Desc    page to register birds during a watching session
+// @route   GET/birds/session/:id
 router.get('/session/:id', ensureAuth, async (req, res) => {
     let idUser = mongoose.Types.ObjectId(req.user.id)
     let idWatch = mongoose.Types.ObjectId(req.params.id)
@@ -99,10 +79,7 @@ router.get('/session/:id', ensureAuth, async (req, res) => {
 })
 
 
-
-
-
-// @desc    Process add form
+// @desc    Process add form adding birds to spotted
 // @route   POST /birds
 router.post('/add_bird', ensureAuth, flash, async (req, res) => {
     try {
@@ -121,8 +98,54 @@ router.post('/add_bird', ensureAuth, flash, async (req, res) => {
             console.error(err)
             res.render('errors/500')
         }
-
     }
+});
+
+
+// @desc    add birds to the spotte list from with in the watch sesssion
+// @route   POST /birds
+router.get('/add_bird_session/:id', ensureAuth, flash, async (req, res) => {
+    try {
+        const location = await Location.findOne({user: req.user.id}).lean();
+        res.render('birds/add_bird_session',{
+            name: req.user.firstName,
+            location,
+            sessionId: req.params.id
+        });
+    }
+    catch (err) {
+        console.error(err)
+        res.render('error/500')
+    }
+});
+
+
+// @desc    Process add form adding birds to spotted
+// @route   POST /birds/add_bird_session
+router.post('/add_bird_session/:id', ensureAuth, flash, async (req, res) => {
+        const newBird = {
+            comName: req.body.comName,
+            speciesCode: req.body.speciesCode,
+            user: req.user.id,
+            count: {
+                count: req.body.count,
+                watchSession: req.params.id
+            }
+        }
+        try {
+            let bird = await Bird.findOne({id: req.body.id})
+
+            if (bird) {
+                done(null, bird)
+            } else {
+                bird = await Bird.create(newBird)
+                done(null, bird)
+            }
+        } catch (err) {
+            console.error(err)
+        }
+
+    res.redirect('/birds/session/' + req.params.id)
 });
 
 
@@ -162,13 +185,10 @@ router.put('/update/:id', ensureAuth, async (req, res) => {
     res.redirect('/birds/session/' + req.params.id)
 });
 
-
 // @desc    Creates new spotted bird watch seesion
 // @route   put /birds/create
 router.put('/create/:id', ensureAuth, async (req, res) => {
-    console.log("req", req.body);
     const update = await Bird.findOneAndUpdate(
-
         {"_id": req.body.birdId},
         {
             $push: {
@@ -182,9 +202,9 @@ router.put('/create/:id', ensureAuth, async (req, res) => {
             upsert: true,
             rawResult: true
         }
-
     );
    res.redirect('/birds/session/' + req.params.id)
+
 });
 
 

@@ -43,5 +43,19 @@ p {
   margin-right: 10px;
 }
 
+.no-border {
+  border: 0;
+  box-shadow: none; /* You may want to include this as bootstrap applies these styles too */
+  height: 1.6rem;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+.base-color {
+  background-color: $base-color;
+  border: none;
+}
 
 

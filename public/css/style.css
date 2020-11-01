@@ -50,15 +50,17 @@
 .adds {
   display: flex;
   align-content: center;
-  height: 2rem;
 }
 
 #bird-list {
   display: none;
 }
 
+#show-list {
+  display: none;
+}
+
 .spotted-birdsU {
-  margin-right: 40px;
   display: flex;
   align-items: center;
   height: 2rem;
@@ -67,12 +69,12 @@
 .name-box {
   display: flex;
   width: 600px;
-  margin-right: 40px;
 }
 
 .watch-list {
   list-style: none;
   display: flex;
+  margin-bottom: 3px;
 }
 .watch-list a:link {
   text-decoration: none;
@@ -93,18 +95,19 @@
   align-items: center;
 }
 
-.bird-btn-start, .bird-btn-sm {
+.sub-btn, .add-btn, .bird-btn-box, .bird-btn-start, .bird-btn-sm {
   background-color: #710a2c;
   border-color: #435360;
   border-radius: 5px;
   color: #f5f6f4;
-  font-weight: 800;
-  font-size: 1rem;
+  font-weight: 600;
 }
 
 .bird-btn-sm {
   padding: 5px 10px;
   border: 0;
+  font-size: 0.9rem;
+  margin-right: 40px;
 }
 .bird-btn-sm:hover {
   background-color: #BF980D;
@@ -115,11 +118,39 @@
 .bird-btn-start {
   padding: 10px 20px;
   width: 200px;
+  font-size: 0.9rem;
+  font-weight: 800;
 }
 
-.sub-button {
+.bird-btn-box {
+  width: 75px;
+  font-size: 0.8rem;
+}
+
+.add-btn {
+  background-color: #533A71;
+  padding: 5px 7px;
   border: 0;
-  margin-left: 40px;
+  font-size: 0.9rem;
+  margin-right: 20px;
+}
+.add-btn:hover {
+  background-color: #BF980D;
+  padding: 5px 7px;
+  border: 0;
+}
+
+.sub-btn {
+  background-color: #E4572E;
+  padding: 5px 7px;
+  border: 0;
+  font-size: 0.9rem;
+  margin-right: 20px;
+}
+.sub-btn:hover {
+  background-color: #BF980D;
+  padding: 5px 7px;
+  border: 0;
 }
 
 .search-box {
@@ -138,12 +169,18 @@
 }
 
 .search-bar {
-  width: 400px;
+  width: 200px;
   margin-right: 40px;
 }
 
 .search-container {
   margin-top: 2rem;
+}
+
+.search-bar-container {
+  background-color: #e3ced5;
+  width: 100%;
+  padding: 5px;
 }
 
 .hide {
@@ -188,10 +225,51 @@
 
 .spotted-birds {
   display: flex;
+  align-items: center;
 }
 
 .spotted-list {
   display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+}
+.spotted-list a {
+  color: #435360;
+}
+.spotted-list a:link {
+  text-decoration: none;
+  color: #435360;
+}
+.spotted-list a:hover {
+  text-decoration: none;
+  font-weight: 800;
+  color: #BF980D;
+}
+.spotted-list a:visted {
+  text-decoration: none;
+  color: #435360;
+}
+
+.bird-bar {
+  background-color: #8d3b56;
+}
+
+.search-box-bar {
+  width: 200pc;
+  display: flex;
+  align-items: center;
+  padding-top: 2px;
+}
+
+.session-add-btn {
+  padding: 2px 40px;
+  background-color: #710a2c;
+  color: #f5f6f4;
+  border-radius: 5px;
+  border: none;
+  font-weight: 800;
+  font-size: 0.9rem;
+  margin: 2px auto;
 }
 
 * {
@@ -229,6 +307,22 @@ p {
 .btn-float {
   float: left;
   margin-right: 10px;
+}
+
+.no-border {
+  border: 0;
+  box-shadow: none;
+  /* You may want to include this as bootstrap applies these styles too */
+  height: 1.6rem;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+.base-color {
+  background-color: #f5f6f4;
+  border: none;
 }
 
 /*# sourceMappingURL=style.css.map */

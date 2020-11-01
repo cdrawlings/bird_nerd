@@ -141,8 +141,6 @@ router.get('/chart', ensureAuth, async (req, res) => {
                     as: "watch"
                 }},
 
-
-            // {$match: {'count.watchSession': idWatch} }
         ]);
         res.render('chart', {
             name: req.user.firstName,
@@ -150,7 +148,6 @@ router.get('/chart', ensureAuth, async (req, res) => {
             last
         });
 
-        console.log("Last try: ", last)
 
     } catch (err) {
         console.error(err);
