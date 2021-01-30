@@ -41,10 +41,10 @@ class Weather {
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${this.apiKey}&units=imperial`
         );
-
         const responseData = await response.json()
-        console.log(responseData);
-
+        let temp = responseData.main.temp;
+        let round = Math.round(temp);
+        responseData.main.temp = round
         return responseData;
     }
 }

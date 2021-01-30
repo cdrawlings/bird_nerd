@@ -24,17 +24,17 @@ router.get('/', ensureAuth, async (req, res) => {
 router.get('/add_birds', ensureAuth, flash, async (req, res) => {
     try {
         const location = await Location.findOne({user: req.user.id}).lean()
+        const birds = await Bird.find({user: req.user.id}).lean()
         res.render('birds/add_birds', {
             name: req.user.firstName,
-            location
+            location,
+            birds
         });
     } catch (err) {
         console.error(err)
         res.render('error/500')
     }
 });
-
-
 
 
 // @Desc    page to register birds during a watching session
@@ -153,6 +153,8 @@ router.post('/add_bird_session/:id', ensureAuth, flash, async (req, res) => {
 // @desc    show information for a single bird
 // @route   put /birds
 router.put('/single/:id', ensureAuth, async (req, res) => {
+    let idUser = mongoose.Types.ObjectId(req.user.id)
+    let idWatch = mongoose.Types.ObjectId(req.params.id)
     const birds = await Bird.aggregate([
         {$project: {comName: 1, speciesCode: 1, count: 1, _id: 1, user: 1, 'count.count': 1, 'count.watchSession.startTime': 1}},
         {$match: {user: idUser} },

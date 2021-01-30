@@ -24,7 +24,7 @@ let requestOptions = {
 let birdView = document.getElementById('bird-list');
 
 fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lon}`, requestOptions)
-    .then(response => response.json())
+    .then(respo-nse => response.json())
     .then(function(birds) {
         console.log(birds);
 

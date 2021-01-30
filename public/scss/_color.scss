@@ -1,9 +1,17 @@
 
-$primary-color: #710a2c;
-$secondary-color: #191f24;
-$charcoal-color: #435360;
-$base-color: #f5f6f4;
+$primary-color: #8f000eff;
+$secondary-color:#2e294eff;
+$charcoal-color: #081a21ff;
+$base-color: #fffcf9;
 $slate-gray-color: #6e7e85;
+
+
+$dark-red: #8f000eff;
+$rich-black-fogra-29: #081a21ff;
+$space-cadet: #2e294eff;
+$selective-yellow: #fcba04ff;
+$baby-powder: #fffcf9;
+
 
 // nav bar colors Link is Base-color
 $active: #6e7e85;
@@ -15,3 +23,25 @@ $add-button: #533A71;
 
 $sub-button: #E4572E;
 
+    /*
+    ========  CSS HEX
+    --dark-red: #8f000eff;
+    --rich-black-fogra-29: #081a21ff;
+    --space-cadet: #2e294eff;
+    --selective-yellow: #fcba04ff;
+    --baby-powder: #fffcf9ff;
+
+   ========  SCSS HEX
+    $dark-red: #8f000eff;
+    $rich-black-fogra-29: #081a21ff;
+    $space-cadet: #2e294eff;
+    $selective-yellow: #fcba04ff;
+    $baby-powder: #fffcf9ff;
+
+    ========   SCSS RGB
+    $dark-red: rgba(143, 0, 14, 1);
+    $rich-black-fogra-29: rgba(8, 26, 33, 1);
+    $space-cadet: rgba(46, 41, 78, 1);
+    $selective-yellow: rgba(252, 186, 4, 1);
+    $baby-powder: rgba(255, 252, 249, 1);
+    */

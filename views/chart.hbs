@@ -1,80 +1,153 @@
 
+<div id="container" class="svg-container"></div>
+<script>
 
-<h6>Dashboard</h6>
+    const width = 960;
+    const height = 500;
+    const margin = 5;
+    const padding = 5;
+    const adj = 100;
 
-{{name}}
-{{location.longitude}}
-{{location.latitude}}
+    // VARIABLE COLOR
+    // const color = d3.scaleOrdinal().range(d3.schemeCategory10);
 
-{{#if location}}
+    const svg = d3.select("div#container").append("svg")
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", "-"
+                    + adj + " -"
+                    + adj + " "
+                    + (width + adj *3) + " "
+                    + (height + adj*3))
+            .style("padding", padding)
+            .style("margin", margin)
+            .classed("svg-content", true);
 
-    <!-- if there is location information show Bird -->
+    // DATA
+    const timeConv = d3.timeParse("%d-%b-%Y");
+    const dataset = d3.csv("../data/2020_birds.csv");  // Getting data
+    dataset.then(function(data) {
+        var slices = data.columns.slice(1).map(function(id) {
+            return {
+                id: id,
+                values: data.map(function(d){
+                    return {
+                        date: timeConv(d.date),
+                        measurement: +d[id]
+                    };
+                })
+            };
+        });
 
-    <h5>Your birds</h5>
+// SCALES
+        const xScale = d3.scaleTime().range([0,width]);
+        const yScale = d3.scaleLinear().rangeRound([height, 0]);
+        xScale.domain(d3.extent(data, function(d){
+            return timeConv(d.date)}));
 
-    {{#if birds}}
+        yScale.domain([(0), d3.max(slices, function(c) {
+            return d3.max(c.values, function(d) {
+                return d.measurement + 4; });
+        })
+        ]);
 
-            <ul>
-                {{#each birds}}
-                    <li class="watch-list">
+// AXES
+        const yaxis = d3.axisLeft().scale(yScale);
 
-                        <a href="https://ebird.org/species/{{speciesCode}}/us" class="bird-name">{{comName}}</a>
-                        {{watch.startTime}}, {{watchSession}}
-                    </li>
-                {{/each}}
-            </ul>
+        const xaxis = d3.axisBottom()
+                .ticks(d3.timeMonth.every(1))
+                .tickFormat(d3.timeFormat('%m %y'))
+                .scale(xScale);
 
-    {{else}}
+// LINES
+        const line = d3.line()
+                .x(function(d) { return xScale(d.date); })
+                .y(function(d) { return yScale(d.measurement); });
 
-    {{/if}}
+// AXES
+        svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xaxis);
 
+        svg.append("g")
+                .attr("class", "axis")
+                .call(yaxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("dy", ".75em")
+                .attr("y", 6)
+                .style("text-anchor", "end")
+                .text("Frequency");
 
-    <h5>Your bird watching sesion</h5>
+// LINES
+        const lines = svg.selectAll("lines")
+                .data(slices)
+                .enter()
+                .append("g");
 
+        lines.append("path")
+                .attr("class", "line")
+                .attr("d", function(d) { return line(d.values); });
 
+        lines.append("text")
+                .attr("class","serie_label")
+                .datum(function(d) {
+                    return {
+                        id: d.id,
+                        value: d.values[d.values.length - 1]}; })
+                .attr("transform", function(d) {
+                    return "translate(" + (xScale(d.value.date) + 10)
+                            + "," + (yScale(d.value.measurement) + 5 )+ ")"; })
+                .attr("x", 5)
+                .text(function(d) { return d.id; });
 
-{{else}}
+        const ghost_lines = lines.append("path")
+                .attr("class", "ghost-line")
+                .attr("d", function(d) { return line(d.values); });
 
-    <!-- if  there is NO location information get location -->
+// EVENTS
+        svg.selectAll(".ghost-line")
+                .on('mouseover', function() {
+                    const selection = d3.select(this).raise();
 
-    <form action="/add_location" method="POST" class="form-group">
-        <div class="get-location row">
-            <label for="latitude">Latitude</label>
-            <input id="latitude" value="" type="text" name="latitude" class="form-control">
-        </div>
+                    selection
+                            .transition()
+                            .delay("100").duration("10")
+                            .style("stroke","blue")
+                            .style("opacity","1")
+                            .style("stroke-width","3");
 
-        <div  class="get-location row">
-            <label for="longitude">Longitude</label>
-            <input id="longitude" value="" type="text" name="longitude" class="form-control">
-        </div>
+                    // add the legend action
+                    const legend = d3.select(this.parentNode)
+                            .select(".serie_label");
 
-        <div  class="get-location row">
-            <label for="locality">Your location will be listed as:</label>
-            <input id="locality" value="" type="text" name="location" class="form-control">
-        </div>
+                    legend
+                            .transition()
+                            .delay("100")
+                            .duration("10")
+                            .style("fill","blue");
+                })
 
-        <div id="city-loc"></div>
+                .on('mouseout', function() {
+                    const selection = d3.select(this)
 
-        <div class="row">
-            <input type="submit" value="Accept" class="btn">
-        </div>
+                    selection
+                            .transition()
+                            .delay("100")
+                            .duration("10")
+                            .style("stroke","#d2d2d2")
+                            .style("opacity","0")
+                            .style("stroke-width","10");
 
-    </form>
+                    // add the legend action
+                    const legend = d3.select(this.parentNode)
+                            .select(".serie_label");
 
-{{/if}}
-
-
-<form action="start" method="POST" class="form-group">
-    <input type="text" id="tempature" aria-hidden="true" value="" name="tempature">
-    <input type="text" id="condition" aria-hidden="true" value="" name="condition">
-    <input type="text" id="local" aria-hidden="true" value="{{location._id}}" name="local">
-
-
-    <input type="submit" value="Start Session">
-</form>
-
-
-
-
-
-<script src="/js/location.js"></script>
+                    legend
+                            .transition()
+                            .delay("100")
+                            .duration("10")
+                            .style("fill","#d2d2d2");
+                });
+    });
+</script>

@@ -1,55 +1,221 @@
 
 
-<h6>Dashboard</h6>
-
-Welcome, {{name}}! Are you ready to bird watch?]
-
-{{#if location}}
-
-<!-- if there is location information show Bird -->
-
-
-<form action="start" method="POST" class="form-group">
-    <input type="hidden" id="tempature" aria-hidden="true" value="" name="tempature">
-    <input type="hidden" id="condition" aria-hidden="true" value="" name="condition">
-    <input type="hidden" id="local" aria-hidden="true" value="{{location._id}}" name="local">
-
-
-    <input type="submit" value="Start Session" class="bird-btn-start">
-</form>
+<div class="container-fluid mt-0 dash-b">
+<div class="row justify-content-center">
+<div class="col-md-10">
 
 
 
 
-{{else}}
 
-    <!-- First time logging in  or if  there is NO location information get location -->
-
-    <form action="/add_location" method="POST" class="form-group">
-        <div class="get-location row">
-            <label for="latitude">Latitude</label>
-            <input id="latitude" value="" type="text" name="latitude" class="form-control">
+        <div class="hide">
+            {{location.longitude}}
+            {{location.latitude}}
+            <h3 id="w-lon" class="wthr-cord">{{location.longitude}}</h3>
+            <h3 id="w-lat" class="wthr-cord">{{location.latitude}}</h3>
         </div>
 
-        <div  class="get-location row">
-            <label for="longitude">Longitude</label>
-            <input id="longitude" value="" type="text" name="longitude" class="form-control">
+
+ {{#if location}}
+
+     {{#if last}}
+
+         <table id="table" class="hide">
+             {{#each last}}
+                 <tr>
+                     <td>{{comName}}</td>
+                     <td >{{ count }}</td>
+                 </tr>
+             {{/each}}
+         </table>
+
+     {{else}}
+
+     {{/if}}
+            <!-- if there is location information show Bird -->
+
+     <section class="page-content"  >
+<div class="wrapper">
+         <div class="box a1">
+             <h3>Welcome back {{name}} </h3>
+             Bird watching conditions in {{location.location}} for <span id="birdTime"></span>
+         </div>
+
+         <div class="box b">
+                <p class="bold">Tempature</p>
+
+                <div id="w-string" class="temp"></div>
+         </div>
+
+         <div class="box c">
+          <p class="bold">Condition</p>
+             <img id="w-icon" class="wthr-icon-d" alt="weather icon" /><br>
+             <span id="w-desc"></span>
+
+         </div>
+
+         <div class="box d">
+
+                <div class="b-line">
+                    <div>
+                        <span class="bold">Spotted birds</span><br>
+                        Birds you have spotted.
+                    </div>
+                    <div class="new-b">
+                        <a href="/birds/add_birds"> <button class="btn-light" >See a new bird?</button></a>
+                    </div>
+                </div>
+
+                 <div class="spotted">
+
+                 {{#if birds}}
+                     <ul>
+                         {{#each birds}}
+                             <li class="spot-list">
+                                 <div class="all-bird-list">
+                                     <a href="https://ebird.org/species/{{speciesCode}}/us" class="bird-name">{{comName}}</a>
+                                 </div>
+                             </li>
+                         {{/each}}
+                     </ul>
+                 {{else}}
+                     <p>You have not spotted any birds</p>
+                 {{/if}}
+                </div>
+
+         </div>
+
+
+         <div class="box e">
+
+             <form action="start" method="POST" class="form-group">
+                 <input type="hidden" id="tempature" aria-hidden="true" value="" name="tempature">
+                 <input type="hidden" id="condition" aria-hidden="true" value="" name="condition">
+                 <input type="hidden" id="local" aria-hidden="true" value="{{location._id}}" name="local">
+                 <input class="btn-light" type="submit" value="Start Session">
+             </form>
+
+         </div>
+
+         <div class="box f">
+
+             <p class="bold">Spotted your last session</p>
+
+             <!-- Button trigger modal -->
+             <div data-toggle="modal" data-target="#lastModal">
+                 <img class="modal-b"  src="../images/Pie.svg">
+
+             </div>
+
+             <button type="button" class="btn-light" data-toggle="modal" data-target="#lastModal">
+                 Yesterday's activity
+             </button>
+
+             <!-- Modal -->
+             <div class="modal fade" id="lastModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                         <div class="modal-header">
+                             <h5 class="modal-title" id="exampleModalLabel">Spotted last session</h5>
+                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                             </button>
+                         </div>
+                         <div class="modal-body">
+                             The information displayed in this chart is based on the entries made from your last session.
+                             <div id="chart"></div>
+                         </div>
+                         <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                             <button type="button" class="btn btn-primary">Save changes</button>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+         </div>
+    <div class="g">
+
+        <p class="bold">Historical bird activity</p>
+
+        <!-- Button trigger modal -->
+        <div data-toggle="modal" data-target="#historyModal">
+           <img class="modal-b" src="../images/line.svg">
+        </div><br>
+        <button type="button" class="btn-light" data-toggle="modal" data-target="#historyModal">
+Past activity
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Historical bird viewing activity</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        The information displayed in this chart is static as a demonstration. THis information does not reflect the data entered.
+
+                        <div id="container" class="svg-container"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div  class="get-location row">
-            <label for="locality">Your location will be listed as:</label>
-            <input id="locality" value="" type="text" name="location" class="form-control">
-        </div>
+    </button>
 
-        <div id="city-loc"></div>
+     </div>
 
-        <div class="row">
-            <input type="submit" value="Accept" class="btn">
-        </div>
+     </section>
 
-    </form>
+        {{else}}
 
-{{/if}}
+            <!-- if  there is NO location information get location -->
 
+            <form action="/add_location" method="POST" class="form-group">
+                <div class="get-location row">
+                    <label for="latitude">Latitude</label>
+                    <input id="latitude" value="" type="text" name="latitude" class="form-control">
+                </div>
 
+                <div  class="get-location row">
+                    <label for="longitude">Longitude</label>
+                    <input id="longitude" value="" type="text" name="longitude" class="form-control">
+                </div>
+
+                <div  class="get-location row">
+                    <label for="locality">Your location will be listed as:</label>
+                    <input id="locality" value="" type="text" name="location" class="form-control">
+                </div>
+
+                <div id="city-loc"></div>
+
+                <div class="row">
+                    <input type="submit" value="Accept" class="btn">
+                </div>
+
+            </form>
+
+        {{/if}}
+
+</div>
+</div>
+</div>
+
+<!-- DONUT SCRIPT --->
+
+<!-- LINE CHART SCRIPT -->
+
+<script src="/js/donut.js"></script>
+<script src="/js/ghost.js"></script>
+<script src="/js/weather.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="/js/location.js"></script>
+<script src="/js/show_date.js"></script>

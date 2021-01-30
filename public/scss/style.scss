@@ -1,8 +1,10 @@
 @import "color";
 @import "components";
 
-
-
+.navbar {
+  padding: 0;
+  font-size: .9rem;
+}
 
 $font-stack: Raleway, Helvetica, Arial, sans-serif;
 
@@ -20,11 +22,17 @@ li {
   text-decoration: none;
 }
 
+.form-inline a {
+  padding: 0 10px;
+}
+
+// Body
+
 body {
   font-family: $font-stack;
   line-height: 1.6rem;
   color: $charcoal-color;
-  background-color: $base-color;
+  background-color: rgba(46, 41, 78, .1);;
 }
 
 p {
@@ -32,15 +40,52 @@ p {
   color: $charcoal-color;
 }
 
+label {
+  margin: 1rem 0 0;
+  padding: 0;
+  font-size: .9rem;
+  text-align: left;
+}
+
+.container {
+  padding: 0;
+  margin-top: 0;
+  margin-left: 0;
+}
+
 .login-container {
+  position: relative;
   width: 400px;
-  margin-top: 50px;
-  text-align: center;
+  margin: 100px auto 0;
+  -webkit-box-shadow: 0 0 15px 0px #000;
+  -moz-box-shadow: 0 0 15px 0px #000;
+  box-shadow: 0 0 15px 0px #000;
+  z-index: 10;
+}
+
+.login-bckgrnd {
+  background: #8f000eff;
+  width: 100%;
+  height: 350px;
+  margin-top: 0;
+  position: absolute;
 }
 
 .btn-float {
   float: left;
   margin-right: 10px;
+}
+
+.btn-light{
+  background-color: rgba(46, 41, 78, .8);
+  font-size: .8rem;
+  font-weight: 500;
+  color: $baby-powder;
+  padding: 3px 10px;
+  border: none;
+  border-radius: 5px;
+  margin: 0 auto 5px;
+
 }
 
 .no-border {
@@ -57,5 +102,25 @@ p {
   background-color: $base-color;
   border: none;
 }
+
+.bold {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: $primary-color;
+  color: rgba(255, 255, 255, .6);
+  text-align: center;
+}
+
+
+
+
+
 
 

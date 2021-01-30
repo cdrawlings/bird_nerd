@@ -1,29 +1,86 @@
+<div class="container-fluid mt-0 add-b">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
 
-<div class="container search-container">
-    <section class="loc-info">
-        <div id="b-location"> {{location.location}} a</div>
-        <div id="b-longitude"> {{location.longitude}}</div>
-        <div id="b-latitude">{{location.latitude}}</div>
-    </section>
+            <div class="page-content">
+                <div class="search-container">
 
-    {{#if message }}
-        <div class="alert alert-{{message.type}}">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <h3>{{message.intro}}</h3>
-            {{message.message}}
+                    <section class="loc-info">
+                        <div id="b-location"> {{location.location}} a</div>
+                        <div id="b-longitude"> {{location.longitude}}</div>
+                        <div id="b-latitude">{{location.latitude}}</div>
+                    </section>
+
+                    <section>
+                        {{#if message }}
+                            <div class="alert alert-{{message.type}}">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <h3>{{message.intro}}</h3>
+                                {{message.message}}
+                            </div>
+                        {{/if}}
+
+                    </section>
+
+                    <h3>Add a new bird to your birds spotted list</h3>
+                    <p class="lead">Birds seen in {{location.location}} during the last 30 days</p>
+
+
+                    <!-- MAIN SEARCH AREA / BIRD LIST -->
+                    <div class="adds">
+
+
+                        <!-- FIND BIRD -->
+                        <div class="mr-5 s-box">
+
+                            <span class="bold">Search</span><br>
+
+                            <div class="search-box">
+                                <input type="text" id="filterBird" class="form-control search-bar"
+                                       placeholder="Bird Name">
+
+                                <button class="bird-btn-start" id="full-list">Full List</button>
+                            </div>
+
+                            <br>
+                            <div id="bird-list">
+                            </div>
+
+                        </div>
+
+                        <!-- CURRENT BIRD LIST-->
+                        <div>
+
+
+                                <span class="bold">Spotted birds</span><br>
+                                    Birds you have spotted.
+
+
+                            <div class="spotted">
+
+                                {{#if birds}}
+                                    <ul>
+                                        {{#each birds}}
+                                            <li class="spot-list">
+                                                <div class="all-bird-list">
+                                                    <a href="https://ebird.org/species/{{speciesCode}}/us"
+                                                       class="bird-name">{{comName}}</a>
+                                                </div>
+                                            </li>
+                                        {{/each}}
+                                    </ul>
+                                {{else}}
+                                    <p>You have not spotted any birds</p>
+                                {{/if}}
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
-    {{/if}}
-
-    <h1>Recent birds</h1>
-    <p class="lead">Birds seen in {{location.location}} during the last 30 days</p>
-    <div class="search-box">
-        <input type="text" id="filterBird" class="form-control search-bar" placeholder="Bird Name">
-
-        <button class="bird-btn-start" id="full-list">Full List</button>
-    </div>
-
-    <br>
-    <div id="bird-list">
     </div>
 </div>
 

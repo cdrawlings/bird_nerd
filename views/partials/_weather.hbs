@@ -1,73 +1,25 @@
-
 <div class="wthr-bar">
+<div class="container-fluid">
 
 
-    <section class="container ">
-        <div class="row weather">
 
-            <div id="w-loc" class="wthr-city">{{location.location}}</div>
+        <div class="row justify-content-center">
 
-            <div id="w-string" class="wthr-info"></div>
+            <div class="col-md-10 weather">
 
-            <img id="w-icon" class="wthr-icon" alt="weather icon" />
+                <div id="w-loc" class="wthr-city mr-1">{{location.location}}</div>
 
-            <div class="wthr-info" id="w-desc"></div>
+                <div id="w-string" class="wthr-info mr-1"></div>
 
-            <h3 id="w-lon" class="wthr-cord">{{location.longitude}}</h3>
-            <h3 id="w-lat" class="wthr-cord">{{location.latitude}}</h3>
+                <div id="w-desc" class="wthr-info mr-1"></div>
 
-        </div>
+                <img id="w-icon" class="wthr-icon" alt="weather icon" />
 
-<!-- HIDE THE CHANGE LOCATION BUTTON
+                <h3 id="w-lon" class="wthr-cord">{{location.longitude}}</h3>
+                <h3 id="w-lat" class="wthr-cord">{{location.latitude}}</h3>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#locModal">
-            Change Location
-        </button>
-
--->
-
-    </section>
-
-
-</div>
-
-
-<!-- Modal to change location -->
-
-
-<div class="modal fade" id="locModal" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="locModalLabel">Choose Location</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
 
-
-            <div class="modal-body">
-                <form id="w-form">
-                    <div class="form-group">
-                        <label for="city">City</label>
-                        <input type="text" id="city" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="state">State</label>
-                        <input type="text" id="state" class="form-control"/>
-                    </div>
-                </form>
-            </div>
-
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Close
-                </button>
-                <button id="w-change-btn" type="button" class="btn btn-primary">
-                    Save changes
-                </button>
-            </div>
         </div>
     </div>
 </div>

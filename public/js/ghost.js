@@ -112,7 +112,6 @@ dataset.then(function(data) {
                 .delay("100").duration("10")
                 .style("stroke","blue")
                 .style("opacity","1")
-
                 .style("stroke-width","3");
 
             // add the legend action

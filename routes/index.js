@@ -38,8 +38,11 @@ router.post('/login', ensureGuest, (req, res, next) => {
 
 // @desc    Gets the users location
 // @route   POST / location
-router.get('/register', ensureGuest, async (req, res) => {
-    res.render('register')
+router.get('/register', ensureGuest, (req, res) => {
+    res.render('register', {
+        layout: "login"
+    })
+
 });
 
 // @desc    REGISTERS THE USER
@@ -110,12 +113,41 @@ router.post('/register', ensureGuest, async (req, res) => {
 // @Desc    Dashboard
 // @route   GET/ Dashboard
 router.get('/dashboard', ensureAuth, async (req, res) => {
+    let idUser = mongoose.Types.ObjectId(req.user.id)
     try {
+        const birds = await Bird.find({user: req.user.id}).lean();
         const location = await Location.findOne({user: req.user.id}).lean();
-        const session = await Watch.findById(req.params.id).lean()
+        const session = await Watch.findById(req.params.id).lean();
+
+        const last = await Bird.aggregate([
+            {$match: {user: idUser} },
+            {$project: {_id: 1, user: 1, comName: 1, 'count': 1, 'startTime': 1 }},
+            {$unwind: '$count'}, // All records for this user
+            {$lookup: {
+                    from: "watchsessions",
+                    localField: "count.watchSession",
+                    foreignField: "_id",
+                    as: "watch"
+                }},
+            {$unwind: '$watch'},// All records including the seesion data for each entry
+            {$sort: { _id:1, startTime: 1}},
+            {$group: {
+                    _id: "$_id",
+                    startTime: { $last: "$watch.startTime"},
+                    count: { $last: "$count.count"},
+                    comName: { $last: "$comName"}}
+            },
+            {$project: {comName: 1, startTime: 1, _id: 0, count: 1}},
+
+        ]);
+        console.log("last: ", last );
+
         res.render('dashboard', {
+            layout: "dash",
             name: req.user.firstName,
-            location
+            location,
+            birds,
+last
         });
     } catch (err) {
             console.error(err);
