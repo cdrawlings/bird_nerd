@@ -1,5 +1,14 @@
 const mongoose = require('mongoose')
 
+const BirdCountSchema = new mongoose.Schema({
+    count: {
+        type: Number,
+    },
+    bird: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Bird'
+    }
+})
 
 const WatchSessionSchema = new mongoose.Schema({
     tempature: {
@@ -23,6 +32,7 @@ const WatchSessionSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Location'
     },
+    birdcount: [BirdCountSchema]
 });
 
 module.exports = mongoose.model('WatchSession', WatchSessionSchema)

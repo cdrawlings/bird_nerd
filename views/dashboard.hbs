@@ -7,7 +7,6 @@
 
 
 
-
         <div class="hide">
             {{location.longitude}}
             {{location.latitude}}
@@ -31,6 +30,8 @@
 
      {{else}}
 
+
+
      {{/if}}
             <!-- if there is location information show Bird -->
 
@@ -43,6 +44,19 @@
 
          <div class="box b">
                 <p class="bold">Tempature</p>
+
+     {{#if last}}
+
+         <table >
+             {{#each last}}
+                 <tr>
+                     <td>Name: {{last.comName}}</td>
+                     <td >Count: {{ birdcount.count }}</td>
+                 </tr>
+             {{/each}}
+         </table>
+
+     {{/if}}
 
                 <div id="w-string" class="temp"></div>
          </div>

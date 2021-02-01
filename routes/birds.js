@@ -44,7 +44,7 @@ router.get('/session/:id', ensureAuth, async (req, res) => {
     let idWatch = mongoose.Types.ObjectId(req.params.id)
     try {
         const location = await Location.findOne({user: req.user.id}).lean();
-        const session = await Watch.findById(req.params.id).lean()
+        const session = await Watch.findById(req.params.id).lean();
 
         const seen = await Bird.aggregate([
             {$project: {comName: 1, speciesCode: 1, count: 1, _id: 1, user: 1}},
@@ -57,6 +57,7 @@ router.get('/session/:id', ensureAuth, async (req, res) => {
             {$match: {user: idUser} },
             {$match: {'count.watchSession': {$ne: idWatch}}}
         ]);
+
 
         if (!session) {
             return res.render('errors/404')
@@ -88,11 +89,11 @@ router.post('/add_bird', ensureAuth, flash, async (req, res) => {
         res.redirect('/birds/add_birds')
     } catch (err) {
         if (err.name === 'MongoError' && err.code === 11000) {
-                req.session.message = {
-                    type: 'danger',
-                    intro: 'Duplicate',
-                    message: 'This bird has already been added to your list.'
-                }
+            req.session.message = {
+                type: 'danger',
+                intro: 'Duplicate',
+                message: 'This bird has already been added to your list.'
+            }
             res.render('/birds/add_birds')
         } else {
             console.error(err)
@@ -122,7 +123,7 @@ router.get('/add_bird_session/:id', ensureAuth, flash, async (req, res) => {
 
 // @desc    Process add form adding birds to spotted
 // @route   POST /birds/add_bird_session
-router.post('/add_bird_session/:id', ensureAuth, flash, async (req, res) => {
+router.post('/add_bird_session/:id', ensureAuth, flash, async (done, req, res) => {
         const newBird = {
             comName: req.body.comName,
             speciesCode: req.body.speciesCode,
@@ -167,15 +168,16 @@ router.put('/single/:id', ensureAuth, async (req, res) => {
 // @desc    updates session with the new number of birds spotted
 // @route   put /birds
 router.put('/update/:id', ensureAuth, async (req, res) => {
-    const update = await Bird.findOneAndUpdate(
-        {"_id": req.body.birdId, "count.watchSession": req.params.id},
+    const update = await Watch.findOneAndUpdate(
+        {"_id": req.params.id, "birdcount.bird": req.body.birdId},
         {
-            $set: {"count.$.count": req.body.count }
+            $set: {"birdcount.$.count": req.body.count }
         }, {
             new: true,
             upsert: true,
             rawResult: true
         });
+    console.log('Update; ', update)
     //res.send("Sent", req.body.count )
     res.redirect('/birds/session/' + req.params.id)
 });
@@ -184,13 +186,13 @@ router.put('/update/:id', ensureAuth, async (req, res) => {
 // @desc    Creates new spotted bird watch seesion
 // @route   put /birds/create
 router.put('/create/:id', ensureAuth, async (req, res) => {
-    const update = await Bird.findOneAndUpdate(
-        {"_id": req.body.birdId},
+    const update = await Watch.findOneAndUpdate(
+        {"_id": req.params.id}, //body.birdId
         {
             $push: {
-                count: {
+                birdcount: {
                     count: req.body.count,
-                    watchSession: req.params.id
+                    bird: req.body.birdId
                 }
             }
         }, {
@@ -199,6 +201,7 @@ router.put('/create/:id', ensureAuth, async (req, res) => {
             rawResult: true
         }
     );
+    console.log("Update: ", update)
    res.redirect('/birds/session/' + req.params.id)
 
 });

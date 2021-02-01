@@ -20,42 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fff1d82-b51f-4a18-8f6a-8a911a288d8d" name="Default Changelist" comment="dashboard css and clean up">
-      <change afterPath="$PROJECT_DIR$/data_year.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/data/2020_birds.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/data/random.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/data/random.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/Pie.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/line.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/donut.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/show_date.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/layouts/dash.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/WatchSession.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/WatchSession.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/birds.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/birds.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/ghost.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/ghost.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/weather.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/weather.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/weather/ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/weather/ui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_color.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/scss/_color.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/_components.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/scss/_components.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scss/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/scss/style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/birds.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/birds.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/birds/add_birds.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/birds/add_birds.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/birds/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/birds/index.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/birds/session.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/birds/session.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/chart.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/chart.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/dashboard.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/dashboard.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layouts/login.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/login.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/main.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/login.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/_add_button.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/_add_button.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/_header.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/_header.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/_weather.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/_weather.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/register.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/register.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +171,12 @@
       <workItem from="1611946348447" duration="380000" />
       <workItem from="1611947311731" duration="79000" />
       <workItem from="1611947482608" duration="4052000" />
-      <workItem from="1612016611970" duration="5343000" />
+      <workItem from="1612016611970" duration="8607000" />
+      <workItem from="1612111782612" duration="4600000" />
+      <workItem from="1612120746735" duration="312000" />
+      <workItem from="1612121062898" duration="67000" />
+      <workItem from="1612121165597" duration="5466000" />
+      <workItem from="1612204177537" duration="2543000" />
     </task>
     <task id="LOCAL-00001" summary="Ready to change for bird nerd">
       <created>1599404313855</created>
@@ -284,7 +262,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611776526352</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="dashboard and session page updated for CSS now last session getting all items last session fixing">
+      <created>1612025074337</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1612025074337</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,7 +301,8 @@
     <MESSAGE value="Adding bird count fuuly works" />
     <MESSAGE value="Ad bird from session working" />
     <MESSAGE value="dashboard css and clean up" />
-    <option name="LAST_COMMIT_MESSAGE" value="dashboard css and clean up" />
+    <MESSAGE value="dashboard and session page updated for CSS now last session getting all items last session fixing" />
+    <option name="LAST_COMMIT_MESSAGE" value="dashboard and session page updated for CSS now last session getting all items last session fixing" />
   </component>
   <component name="WindowStateProjectService">
     <state x="389" y="89" key="#Deployment" timestamp="1607965463871">
@@ -383,11 +369,11 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="451" y="53" key="RollbackChangesDialog/0.23.1440.877@0.23.1440.877" timestamp="1604594895274" />
-    <state x="351" y="85" key="Vcs.Push.Dialog.v2" timestamp="1611776530260">
+    <state x="351" y="85" key="Vcs.Push.Dialog.v2" timestamp="1612025085057">
       <screen x="47" y="25" width="1393" height="875" />
     </state>
     <state x="314" y="83" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1604241473695" />
-    <state x="351" y="85" key="Vcs.Push.Dialog.v2/47.25.1393.875@47.25.1393.875" timestamp="1611776530260" />
+    <state x="351" y="85" key="Vcs.Push.Dialog.v2/47.25.1393.875@47.25.1393.875" timestamp="1612025085057" />
     <state x="196" y="125" width="1039" height="619" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1611777119197">
       <screen x="47" y="25" width="1393" height="875" />
     </state>
@@ -396,11 +382,11 @@
       <screen x="47" y="25" width="1393" height="875" />
     </state>
     <state x="517" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/47.25.1393.875@47.25.1393.875" timestamp="1611776274422" />
-    <state x="404" y="44" width="832" height="634" key="dock-window-1" timestamp="1608579436428">
+    <state x="640" y="135" width="1082" height="685" key="dock-window-1" timestamp="1612118644558">
       <screen x="47" y="25" width="1393" height="875" />
     </state>
     <state x="77" y="184" width="1363" height="538" key="dock-window-1/0.23.1440.877@0.23.1440.877" timestamp="1604159117000" />
-    <state x="404" y="44" width="832" height="634" key="dock-window-1/47.25.1393.875@47.25.1393.875" timestamp="1608579436428" />
+    <state x="640" y="135" width="1082" height="685" key="dock-window-1/47.25.1393.875@47.25.1393.875" timestamp="1612118644558" />
     <state x="830" y="23" width="1015" height="538" key="dock-window-2" timestamp="1604241399700">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -413,11 +399,11 @@
       <screen x="47" y="25" width="1393" height="875" />
     </state>
     <state x="416" y="421" key="run.anything.popup/47.25.1393.875@47.25.1393.875" timestamp="1611333620641" />
-    <state x="459" y="144" width="670" height="675" key="search.everywhere.popup" timestamp="1611605842114">
+    <state x="459" y="144" width="670" height="675" key="search.everywhere.popup" timestamp="1612126471775">
       <screen x="47" y="25" width="1393" height="875" />
     </state>
     <state x="426" y="142" width="670" height="676" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1604165464953" />
-    <state x="459" y="144" width="670" height="675" key="search.everywhere.popup/47.25.1393.875@47.25.1393.875" timestamp="1611605842114" />
+    <state x="459" y="144" width="670" height="675" key="search.everywhere.popup/47.25.1393.875@47.25.1393.875" timestamp="1612126471775" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -429,7 +415,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/index.js</url>
-          <line>198</line>
+          <line>185</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
