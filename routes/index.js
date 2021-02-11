@@ -38,11 +38,8 @@ router.post('/login', ensureGuest, (req, res, next) => {
 
 // @desc    Gets the users location
 // @route   POST / location
-router.get('/register', ensureGuest, (req, res) => {
-    res.render('register', {
-        layout: "login"
-    })
-
+router.get('/register', ensureGuest, async (req, res) => {
+    res.render('register')
 });
 
 // @desc    REGISTERS THE USER
@@ -114,44 +111,44 @@ router.post('/register', ensureGuest, async (req, res) => {
 // @route   GET/ Dashboard
 router.get('/dashboard', ensureAuth, async (req, res) => {
     let idUser = mongoose.Types.ObjectId(req.user.id)
+    let idWatch = mongoose.Types.ObjectId(req.params.id)
     try {
-        const birds = await Bird.find({user: req.user.id}).lean();
         const location = await Location.findOne({user: req.user.id}).lean();
-        const session = await Watch.findOne({user: req.user.id}).lean();
+        const session = await Watch.findById(req.params.id).lean()
+        const birds = await Bird.find({user: req.user.id}).lean()
+
 
         const last = await Watch.aggregate([
             {$match: {user: idUser} },
-            {$project: {_id: 1, user: 1, comName: 1, 'count': 1, 'startTime': 1, birdcount:1 }},
-            { $sort : { startTime : -1, _id: 1 } },
+            {$project: {_id: 1, user: 1, comName: 1, 'count': 1, 'startTime': 1 }},
+            {$sort: { startTime: -1}},
             {$limit: 1},
-            {$unwind: '$birdcount'}, // All records for this user
+            {$unwind: '$count'}, // All records for this user
             {$lookup: {
                     from: "birds",
-                    localField: "birdcount.bird",
+                    localField: "count.bird",
                     foreignField: "_id",
-                    as: "last"
+                    as: "bird"
                 }},
-            {$unwind: '$last'}, // All records for this user
-            {$project: {_id: 1, user: 1, "last.comName": 1, "last.speciesCode": 1,'count': 1, 'startTime': 1, birdcount:1 }}
+            {$unwind: '$bird'},// All records including the seesion data for each entry
+
 
         ]);
 
-        console.log("Last: ", last);
-        console.log(" Bird: ", last.comName);
+        console.log(last)
 
         res.render('dashboard', {
-            layout: "dash",
             name: req.user.firstName,
             location,
-            birds, last
+            birds,
+            session,
+            last
         });
     } catch (err) {
             console.error(err);
             res.render('errors/500');
     }
 });
-
-
 
 
 // @Desc    Get chart information
@@ -203,6 +200,7 @@ router.post('/add_location', ensureAuth, async (req, res) => {
         res.render('error/500')
     }
 });
+
 
 
 

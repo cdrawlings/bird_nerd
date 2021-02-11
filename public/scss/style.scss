@@ -88,10 +88,17 @@ label {
 
 }
 
+.right {
+  text-align: right;
+}
 .no-border {
   border: 0;
   box-shadow: none; /* You may want to include this as bootstrap applies these styles too */
   height: 1.6rem;
+}
+
+.border-none {
+  border: 0;
 }
 
 .form-group {

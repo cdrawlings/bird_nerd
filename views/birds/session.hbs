@@ -1,15 +1,16 @@
-<div class="container-fluid mt-0 add-b">
+
+
+<div class="container-fluid mt-0 dash-b">
     <div class="row justify-content-center">
         <div class="col-md-10">
-
-            <div class="page-content ">
+            <div class="sess-wrap">
 
                 <div id="watchID" class="hide">{{session._id}}</div>
 
                 <!--- BIRDS SEEN DURING THIS SESSION -->
 
-                <div class="sess-wrap">
-                    <div class="sess-a">
+            <section class="sess-a">
+
                         <span class="bold">Seen this session</span>
 
                         {{#if seen}}
@@ -20,30 +21,31 @@
                                     <li class="spotted-list">
 
                                         <div class="spotted-birds">
-                                            <div id="{{speciesCode}}Code" class="hide">{{speciesCode}}</div>
-                                            <div id="{{speciesCode}}Name" class="hide">{{comName}}</div>
-                                            <div id="{{speciesCode}}ID" class="hide">{{_id}}</div>
+                                           <div id="{{birds.speciesCode}}Code" class="hide">{{birds.speciesCode}}</div>
+                                          <div id="{{birds.speciesCode}}Name" class="hide">{{birds.comName}}</div>
+                                            <div id="{{birds.speciesCode}}Watch" class="hide">{{birds._id}}</div>
+                                            <div id="{{birds.speciesCode}}ID" class="hide">{{birds._id}}</div>
 
                                             <a href="https://ebird.org/species/{{speciesCode}}/us"
-                                               class="bird-name">{{comName}}</a>
+                                               class="bird-name">{{birds.comName}}  = {{session._id}}</a>
                                             <!-- Button trigger modal -->
 
-                                            <button type="button" id="{{speciesCode}}Count"
+                                            <button type="button" id="{{birds.speciesCode}}Count"
                                                     class="bird-btn-sm" data-toggle="modal"
-                                                    data-target="#{{speciesCode}}Modal">
+                                                    data-target="#{{birds.speciesCode}}Modal">
                                                 {{count.count}}</button>
                                         </div>
 
                                         <div class="adds">
-                                            <div class="hide">{{speciesCode}}</div>
+                                            <div class="hide">{{birds.speciesCode}}</div>
 
-                                            <form action="/birds/update/{{count.watchSession}}" method="POST"
+                                            <form action="/birds/update/{{_id}}" method="POST"
                                                   class="form-group">
                                                 <input type="hidden" name="_method" value="PUT">
 
                                                 <input type="hidden" name="count" value="{{count.count}}"
-                                                       id="{{speciesCode}}Add">
-                                                <input type="hidden" value="{{_id}}" id="{{speciesCode}}modal-idA"
+                                                       id="{{birds.speciesCode}}Add">
+                                                <input type="hidden" value="{{birds._id}}" id="{{birds.speciesCode}}modal-idA"
                                                        name="birdId">
 
                                                 <button type="submit" class="bird-btn-add">
@@ -54,15 +56,16 @@
                                         </div>
 
                                         <div class="minuses">
-                                            <div class="hide">{{speciesCode}}</div>
+                                            <div class="hide">{{birds.speciesCode}}</div>
 
-                                            <form action="/birds/update/{{count.watchSession}}" method="POST"
+                                            <form action="/birds/update/{{_id}}" method="POST"
                                                   class="form-group">
+
                                                 <input type="hidden" name="_method" value="PUT">
 
-                                                <input type="hidden" name="count" value="{{count.count}}"
-                                                       id="{{speciesCode}}Minus">
-                                                <input type="hidden" value="{{_id}}" id="{{speciesCode}}modal-idS"
+                                                <input type="hidden" id="{{birds.speciesCode}}Minus" name="count" value="{{count.count}}">
+
+                                                <input type="hidden" value="{{birds._id}}" id="{{birds.speciesCode}}modal-idS"
                                                        name="birdId">
 
                                                 <button type="submit" class="bird-btn-sub">-1</i>
@@ -72,7 +75,7 @@
                                         </div>
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="{{speciesCode}}Modal" tabindex="-1"
+                                        <div class="modal fade" id="{{birds.speciesCode}}Modal" tabindex="-1"
                                              role="dialog" aria-labelledby="birdModalLabel" aria-hidden="true">
                                         </div>
                                     </li>
@@ -83,7 +86,7 @@
                             <p>None yet!</p>
                         {{/if}}
 
-                    </div>
+            </section>
 
                     <!--- LIST OF USERS BIRDS THEY HAVE SPOTTED BUT HAVEN'T SEEN -->
                     <section class="sess-c">
@@ -93,18 +96,21 @@
 
                             <ul class="mt-2">
                                 {{#each birds}}
-                                    <li class="watch-list">
+
+                                    <!-- TO DO: ad javascript to hide li tag if spotted -->
+                                    <li class="watch-list {{speciesCode}}">
 
                                         <div class="spotted-birdsU">
 
-                                            <div id="{{speciesCode}}CodeU" class="hide">{{speciesCode}}</div>
+                                            <div id="{{speciesCode}}CodeU" class="hide spotted-birds">{{speciesCode}}</div>
                                             <div id="{{speciesCode}}NameU" class="hide">{{comName}}</div>
                                             <div id="{{speciesCode}}IdU" class="hide">{{_id}}</div>
 
+
                                             <a href="https://ebird.org/species/{{speciesCode}}/us"
                                                class="bird-name">{{comName}}</a>
-                                            <!-- Button trigger modal -->
 
+                                            <!-- Button trigger modal -->
 
                                             <button type="button" id="{{speciesCode}}CountU" class="bird-btn-sm"
                                                     data-toggle="modal" data-target="#{{speciesCode}}ModalU">
@@ -116,7 +122,7 @@
                                         <div class="plusOne">
                                             <div class="hide">{{speciesCode}}</div>
 
-                                            <form action="/birds/create/{{session._id}}" method="POST"
+                                            <form action="" method="POST"
                                                   class="form-group">
                                                 <input type="hidden" name="_method" value="PUT">
 
@@ -136,7 +142,6 @@
                                              aria-labelledby="birdModalLabelU" aria-hidden="true">
                                         </div>
 
-
                                     </li>
                                 {{/each}}
                             </ul>
@@ -147,17 +152,12 @@
 
                     </section>
                     <section class="sess-b">
+                        <div class="bird-btn-add">
                         {{> _add_button }}
+                        </div>
                     </section>
-                </div>
 
             </div>
-
-        </div>
-
-    </div>
-</div>
-
 
 <script>
 
@@ -185,6 +185,9 @@
             modalCount = document.getElementById('modal-count');
             modal = document.getElementById(code + "Modal");
 
+            console.log('Name:', name)
+
+
             modal.innerHTML = `
 
             <div class="modal-dialog" role="document">
@@ -200,9 +203,9 @@
                 <form action="/birds/update/{{session._id}}" method="POST" class="form-group">
                  <input type="hidden" name="_method" value="PUT">
                     <div class="modal-body" id="modal-count">
-                          <label for="modal-input">Enter birds spotted</label> <input type="text" value="${count.innerText}" id="modal-input" name="count">
-                          <label for="modal-input">bird code</label> <input type="hidden" value="${code}" id="modal-code" name="code">
-                          <label for="modal-input">Bird ID</label> <input type="hidden" value="${id}" id="modal-id" name="birdId">
+                          <label for="modal-input" class="mr-5">Enter number of birds spotted</label> <input type="text" value="${count.innerText}" id="modal-input" name="count">
+                          <label for="modal-input"></label> <input type="hidden" value="${code}" id="modal-code" name="code">
+                          <label for="modal-input"></label> <input type="hidden" value="${id}" id="modal-id" name="birdId">
                     </div>
 
                     <div class="modal-footer">
@@ -224,10 +227,19 @@
             let subtract;
 
             subtract = minus.firstElementChild;
+
+            console.log("Subtract: ",subtract);
             code = subtract.innerText;
+
+            console.log("Code: ", code);
+
             count = document.getElementById(code + "Minus").value;
 
+            console.log("Count: ",count);
+
             count--;
+
+            console.log("Count: ",count);
 
             document.getElementById(code + "Minus").value = count
         });
@@ -253,17 +265,18 @@
     elementsU.forEach((element) => {
         element.addEventListener('mousedown', (e) => {
             let code, name, count, modalCount, modal, id;
-
             code = element.firstElementChild.innerText;
-
             name = document.getElementById(code + "NameU").innerText;
-
             count = document.getElementById(code + "CountU").innerText;
-
             id = document.getElementById(code + "IdU").innerText; // Bird Modal id
 
             modalCount = document.getElementById('modal-count');
             modal = document.getElementById(code + "ModalU");
+
+            console.log("Code: ", code);
+            console.log("Name: ", name);
+            console.log("Count: ", count);
+            console.log("Id: ",id);
 
             modal.innerHTML = `
             <div class="modal-dialog" role="document">
@@ -279,9 +292,9 @@
                 <form action="/birds/create/{{session._id}}" method="POST" class="form-group">
                  <input type="hidden" name="_method" value="PUT">
                     <div class="modal-body" id="modal-count">
-                          <label for="modal-input">Enter birds spotted</label> <input type="text" value="${count}" id="modal-input" name="count">
-                          <label for="modal-input">Enter birds spotted</label> <input type="hidden" value="${code}" id="modal-code" name="code">
-                          <label for="modal-input">ID</label> <input type="hidden" value="${id}" id="modal-id" name="birdId">
+                          <label for="modal-input" class="mr-5">Enter number of birds spotted</label> <input class="input-box" type="text" value="${count}" id="modal-input" name="count">
+                          <label for="modal-input"></label> <input type="hidden" value="${code}" id="modal-code" name="code">
+                          <label for="modal-input"></label> <input type="hidden" value="${id}" id="modal-id" name="birdId">
                     </div>
 
                     <div class="modal-footer">

@@ -8,6 +8,7 @@ const Location = require('../models/Location');
 const Bird = require('../models/Bird');
 const Watch = require('../models/WatchSession');
 
+
 // @Desc    Login/Landing Page
 // @route   GET/
 router.get('/', ensureAuth, async (req, res) => {
@@ -24,17 +25,16 @@ router.get('/', ensureAuth, async (req, res) => {
 router.get('/add_birds', ensureAuth, flash, async (req, res) => {
     try {
         const location = await Location.findOne({user: req.user.id}).lean()
-        const birds = await Bird.find({user: req.user.id}).lean()
         res.render('birds/add_birds', {
             name: req.user.firstName,
-            location,
-            birds
+            location
         });
     } catch (err) {
         console.error(err)
         res.render('error/500')
     }
 });
+
 
 
 // @Desc    page to register birds during a watching session
@@ -44,20 +44,27 @@ router.get('/session/:id', ensureAuth, async (req, res) => {
     let idWatch = mongoose.Types.ObjectId(req.params.id)
     try {
         const location = await Location.findOne({user: req.user.id}).lean();
-        const session = await Watch.findById(req.params.id).lean();
+        const session = await Watch.findById(req.params.id).lean()
+        const birds = await Bird.find({user: req.user.id}).lean()
 
-        const seen = await Bird.aggregate([
+        const seen = await Watch.aggregate([
             {$project: {comName: 1, speciesCode: 1, count: 1, _id: 1, user: 1}},
             {$match: {user: idUser} },
             {$unwind: '$count'},
-            {$match: {'count.watchSession': idWatch} }
-        ]);
-        const birds = await Bird.aggregate([
-            {$project: {comName: 1, speciesCode: 1, count: 1, _id: 1, user: 1}},
-            {$match: {user: idUser} },
-            {$match: {'count.watchSession': {$ne: idWatch}}}
+            {$lookup: {
+                    from: "birds",
+                    localField: "count.bird",
+                    foreignField: "_id",
+                    as: "birds"
+                }},
+            {$unwind: '$birds'},
+            {$match: {_id: idWatch} },
+
         ]);
 
+
+        // console.log("Seen: ", seen)
+        //console.log("Birds: ", birds)
 
         if (!session) {
             return res.render('errors/404')
@@ -89,11 +96,11 @@ router.post('/add_bird', ensureAuth, flash, async (req, res) => {
         res.redirect('/birds/add_birds')
     } catch (err) {
         if (err.name === 'MongoError' && err.code === 11000) {
-            req.session.message = {
-                type: 'danger',
-                intro: 'Duplicate',
-                message: 'This bird has already been added to your list.'
-            }
+                req.session.message = {
+                    type: 'danger',
+                    intro: 'Duplicate',
+                    message: 'This bird has already been added to your list.'
+                }
             res.render('/birds/add_birds')
         } else {
             console.error(err)
@@ -123,7 +130,7 @@ router.get('/add_bird_session/:id', ensureAuth, flash, async (req, res) => {
 
 // @desc    Process add form adding birds to spotted
 // @route   POST /birds/add_bird_session
-router.post('/add_bird_session/:id', ensureAuth, flash, async (done, req, res) => {
+router.post('/add_bird_session/:id', ensureAuth, flash, async (req, res) => {
         const newBird = {
             comName: req.body.comName,
             speciesCode: req.body.speciesCode,
@@ -154,13 +161,10 @@ router.post('/add_bird_session/:id', ensureAuth, flash, async (done, req, res) =
 // @desc    show information for a single bird
 // @route   put /birds
 router.put('/single/:id', ensureAuth, async (req, res) => {
-    let idUser = mongoose.Types.ObjectId(req.user.id)
-    let idWatch = mongoose.Types.ObjectId(req.params.id)
     const birds = await Bird.aggregate([
         {$project: {comName: 1, speciesCode: 1, count: 1, _id: 1, user: 1, 'count.count': 1, 'count.watchSession.startTime': 1}},
         {$match: {user: idUser} },
         {$match: {'count.watchSession': idWatch} }
-
     ]);
 });
 
@@ -169,16 +173,16 @@ router.put('/single/:id', ensureAuth, async (req, res) => {
 // @route   put /birds
 router.put('/update/:id', ensureAuth, async (req, res) => {
     const update = await Watch.findOneAndUpdate(
-        {"_id": req.params.id, "birdcount.bird": req.body.birdId},
+        {"_id": req.params.id, "count.bird": req.body.birdId},
         {
-            $set: {"birdcount.$.count": req.body.count }
+            $set: {"count.$.count": req.body.count }
         }, {
             new: true,
             upsert: true,
             rawResult: true
         });
-    console.log('Update; ', update)
-    //res.send("Sent", req.body.count )
+
+
     res.redirect('/birds/session/' + req.params.id)
 });
 
@@ -187,10 +191,10 @@ router.put('/update/:id', ensureAuth, async (req, res) => {
 // @route   put /birds/create
 router.put('/create/:id', ensureAuth, async (req, res) => {
     const update = await Watch.findOneAndUpdate(
-        {"_id": req.params.id}, //body.birdId
+        {"_id": req.params.id},
         {
             $push: {
-                birdcount: {
+                count: {
                     count: req.body.count,
                     bird: req.body.birdId
                 }
@@ -201,10 +205,9 @@ router.put('/create/:id', ensureAuth, async (req, res) => {
             rawResult: true
         }
     );
-    console.log("Update: ", update)
+
    res.redirect('/birds/session/' + req.params.id)
 
 });
-
 
 module.exports = router

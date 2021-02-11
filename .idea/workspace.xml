@@ -20,13 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fff1d82-b51f-4a18-8f6a-8a911a288d8d" name="Default Changelist" comment="dashboard css and clean up">
+      <change afterPath="$PROJECT_DIR$/models/Count.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Bird.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Bird.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/WatchSession.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/WatchSession.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/birds.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/birds.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/birdSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/birdSearch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/scss/_components.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/scss/_components.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/scss/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/scss/style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/birds.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/birds.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/birds/add_birds.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/birds/add_birds.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/birds/add_bird_session.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/birds/add_bird_session.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/birds/session.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/birds/session.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/dashboard.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/dashboard.hbs" afterDir="false" />
     </list>
@@ -176,7 +181,25 @@
       <workItem from="1612120746735" duration="312000" />
       <workItem from="1612121062898" duration="67000" />
       <workItem from="1612121165597" duration="5466000" />
-      <workItem from="1612204177537" duration="2543000" />
+      <workItem from="1612204177537" duration="2745000" />
+      <workItem from="1612541241461" duration="9335000" />
+      <workItem from="1612555918590" duration="1087000" />
+      <workItem from="1612636151118" duration="1091000" />
+      <workItem from="1612710959663" duration="10009000" />
+      <workItem from="1612730728958" duration="3146000" />
+      <workItem from="1612793469292" duration="617000" />
+      <workItem from="1612802116446" duration="131000" />
+      <workItem from="1612881812169" duration="2422000" />
+      <workItem from="1612885162818" duration="601000" />
+      <workItem from="1612886194493" duration="689000" />
+      <workItem from="1612887256481" duration="1337000" />
+      <workItem from="1612888743000" duration="2901000" />
+      <workItem from="1612895265547" duration="7023000" />
+      <workItem from="1612966400174" duration="408000" />
+      <workItem from="1612970276473" duration="5306000" />
+      <workItem from="1612976649874" duration="757000" />
+      <workItem from="1613058550712" duration="123000" />
+      <workItem from="1613059082068" duration="7192000" />
     </task>
     <task id="LOCAL-00001" summary="Ready to change for bird nerd">
       <created>1599404313855</created>
@@ -269,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612025074337</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Dashboard fixed, Last birds seen fixed to know only get last session. Session Pages need updating as well as add bired seesion.`">
+      <created>1612207973318</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1612207973318</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,17 +332,15 @@
     <MESSAGE value="Ad bird from session working" />
     <MESSAGE value="dashboard css and clean up" />
     <MESSAGE value="dashboard and session page updated for CSS now last session getting all items last session fixing" />
-    <option name="LAST_COMMIT_MESSAGE" value="dashboard and session page updated for CSS now last session getting all items last session fixing" />
+    <MESSAGE value="Dashboard fixed, Last birds seen fixed to know only get last session. Session Pages need updating as well as add bired seesion.`" />
+    <MESSAGE value="All functions done xcept seen bird fro all bird list" />
+    <option name="LAST_COMMIT_MESSAGE" value="All functions done xcept seen bird fro all bird list" />
   </component>
   <component name="WindowStateProjectService">
     <state x="389" y="89" key="#Deployment" timestamp="1607965463871">
       <screen x="47" y="25" width="1393" height="875" />
     </state>
     <state x="389" y="89" key="#Deployment/47.25.1393.875@47.25.1393.875" timestamp="1607965463871" />
-    <state x="229" y="224" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603905552384">
-      <screen x="0" y="23" width="1440" height="877" />
-    </state>
-    <state x="229" y="224" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877@0.23.1440.877" timestamp="1603905552384" />
     <state x="444" y="131" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607788611842">
       <screen x="47" y="25" width="1393" height="875" />
     </state>
@@ -369,28 +397,23 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="451" y="53" key="RollbackChangesDialog/0.23.1440.877@0.23.1440.877" timestamp="1604594895274" />
-    <state x="351" y="85" key="Vcs.Push.Dialog.v2" timestamp="1612025085057">
+    <state x="351" y="85" key="Vcs.Push.Dialog.v2" timestamp="1612207978882">
       <screen x="47" y="25" width="1393" height="875" />
     </state>
-    <state x="314" y="83" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1604241473695" />
-    <state x="351" y="85" key="Vcs.Push.Dialog.v2/47.25.1393.875@47.25.1393.875" timestamp="1612025085057" />
+    <state x="351" y="85" key="Vcs.Push.Dialog.v2/47.25.1393.875@47.25.1393.875" timestamp="1612207978882" />
     <state x="196" y="125" width="1039" height="619" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1611777119197">
       <screen x="47" y="25" width="1393" height="875" />
     </state>
     <state x="196" y="125" width="1039" height="619" key="com.intellij.history.integration.ui.views.FileHistoryDialog/47.25.1393.875@47.25.1393.875" timestamp="1611777119197" />
-    <state x="517" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1611776274422">
-      <screen x="47" y="25" width="1393" height="875" />
+    <state x="486" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1612973466954">
+      <screen x="0" y="25" width="1440" height="875" />
     </state>
+    <state x="486" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1440.875@0.25.1440.875" timestamp="1612973466954" />
     <state x="517" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/47.25.1393.875@47.25.1393.875" timestamp="1611776274422" />
     <state x="640" y="135" width="1082" height="685" key="dock-window-1" timestamp="1612118644558">
       <screen x="47" y="25" width="1393" height="875" />
     </state>
-    <state x="77" y="184" width="1363" height="538" key="dock-window-1/0.23.1440.877@0.23.1440.877" timestamp="1604159117000" />
     <state x="640" y="135" width="1082" height="685" key="dock-window-1/47.25.1393.875@47.25.1393.875" timestamp="1612118644558" />
-    <state x="830" y="23" width="1015" height="538" key="dock-window-2" timestamp="1604241399700">
-      <screen x="0" y="23" width="1440" height="877" />
-    </state>
-    <state x="830" y="23" width="1015" height="538" key="dock-window-2/0.23.1440.877@0.23.1440.877" timestamp="1604241399700" />
     <state x="512" y="327" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1611776428042">
       <screen x="47" y="25" width="1393" height="875" />
     </state>
@@ -399,10 +422,10 @@
       <screen x="47" y="25" width="1393" height="875" />
     </state>
     <state x="416" y="421" key="run.anything.popup/47.25.1393.875@47.25.1393.875" timestamp="1611333620641" />
-    <state x="459" y="144" width="670" height="675" key="search.everywhere.popup" timestamp="1612126471775">
-      <screen x="47" y="25" width="1393" height="875" />
+    <state x="426" y="144" width="693" height="675" key="search.everywhere.popup" timestamp="1613071339140">
+      <screen x="0" y="25" width="1440" height="875" />
     </state>
-    <state x="426" y="142" width="670" height="676" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1604165464953" />
+    <state x="426" y="144" width="693" height="675" key="search.everywhere.popup/0.25.1440.875@0.25.1440.875" timestamp="1613071339140" />
     <state x="459" y="144" width="670" height="675" key="search.everywhere.popup/47.25.1393.875@47.25.1393.875" timestamp="1612126471775" />
   </component>
   <component name="XDebuggerManager">
@@ -415,7 +438,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/index.js</url>
-          <line>185</line>
+          <line>187</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -425,8 +448,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/index.js</url>
-          <line>49</line>
+          <line>46</line>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/routes/birds.js</url>
+          <line>68</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

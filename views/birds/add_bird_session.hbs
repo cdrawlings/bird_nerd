@@ -1,28 +1,67 @@
-<div id="seshId">{{sessionId}}</div> Hello
-<div class="container search-container">
-    <section class="loc-info">
-        <div id="b-location"> {{location.location}} a</div>
-        <div id="b-longitude"> {{location.longitude}}</div>
-        <div id="b-latitude">{{location.latitude}}</div>
-    </section>
+<div class="container-fluid mt-0 add-b">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
 
-    {{#if message }}
-        <div class="alert alert-{{message.type}}">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <h3>{{message.intro}}</h3>
-            {{message.message}}
+            <div class="page-content">
+
+                <div id="seshId" class="hide">{{sessionId}}</div>
+                <h3>Add a just spotted bird to your list</h3>
+                <div class="container search-container">
+                    <section class="loc-info">
+                        <div id="b-location"> {{location.location}} a</div>
+                        <div id="b-longitude"> {{location.longitude}}</div>
+                        <div id="b-latitude">{{location.latitude}}</div>
+                    </section>
+
+                    {{#if message }}
+                        <div class="alert alert-{{message.type}}">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <h3>{{message.intro}}</h3>
+                            {{message.message}}
+                        </div>
+                    {{/if}}
+
+<div class="flex-nospace mt-2">
+                    <div class="card col-md-5 border-none" >
+                        <div class="card-body" >
+                            <h5 class="card-title">Search by name</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <div class="search-box">
+                                <input type="text" id="filterBird" class="form-control search-bar" placeholder="Bird Name">
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card col-md-5 border-none">
+                        <div class="card-body">
+                            <h5 class="card-title">Full list of birds</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Birds that have been spotted recently in your area</h6>
+                            <button class="bird-btn-start" id="full-list">Select</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                    <div class="col-md-5 birdlist" >
+
+                            <div id="bird-list" class="birdlist">
+                            </div>
+
+                    </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
         </div>
-    {{/if}}
 
-    <p class="lead">New bird spotted!</p>
-    <div class="search-box">
-        <input type="text" id="filterBird" class="form-control search-bar" placeholder="Bird Name">
-
-        <button class="bird-btn-start" id="full-list">Full List</button>
-    </div>
-
-    <br>
-    <div id="bird-list">
     </div>
 </div>
 

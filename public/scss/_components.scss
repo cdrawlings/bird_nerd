@@ -101,7 +101,7 @@
 
 .spotted-birdsU {
   width: 300px;
-  margin-right: 20px;
+  margin-right: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -109,12 +109,20 @@
 
 .spotted-birds {
   width: 300px;
-  margin-right: 20px;
+  margin-right: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
+
+hr {
+  border: none;
+  height: 2px;
+  /* Set the hr color */
+  color: #333; /* old IE */
+  background-color: #333; /* Modern Browsers */
+}
+
 
 .sp-name{
   width: 300px;
@@ -152,10 +160,39 @@
 }
 
 
+.flex{
+  display: flex;
+  justify-content: space-between;
+}
+.flex-vert{
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-nospace {
+  display: flex;
+
+}
+
+.birdlist {
+  border: 0;
+  padding: 8px;
+}
+
+.input-box {
+  width: 3rem;
+  text-align: center;
+  padding: 3px;
+}
+.input-no-box {
+  border: 0;
+  overflow: visible;
+}
+
 %bird-btn {
   color: $secondary-color;
   font-weight: 600;
-  margin: 0 5px 5px 0;
+  margin: 0 3px 3px 0;
   border: none;
   font-size: 1rem;
   &:hover {
@@ -167,23 +204,29 @@
 .bird-btn-sm {
   @extend %bird-btn;
   border: thin solid tint($secondary-color, 50%);
-  padding: 5px 20px;
+  padding: 1px 15px;
   border-radius: 5px;
 }
 
 .bird-btn-add {
   @extend %bird-btn;
   background-color: tint($secondary-color, 70%);
+  padding: 1px 10px;
+}
+.bird-btn-addlist {
+  @extend %bird-btn;
+  background-color: tint($secondary-color, 90%);
   padding: 3px 15px;
 }
 
 .bird-btn-sub {
   @extend %bird-btn;
   background-color: #fcba04ff;
-  padding: 3px 15px;
+  padding: 1px 10px;
 }
 
 .bird-btn-start {
+  background-color: tint($secondary-color, 70%);
   @extend %bird-btn;
   padding: 10px 20px;
   width: 200px;
@@ -350,21 +393,23 @@
   grid-column: 1 ;
   grid-row: 1 ;
   text-align: left;
-  background-color: tint($primary-color, 93%);
-  padding: 8px;
+
+  padding: 12px;
+  margin-top: 10px;
 }
 .sess-b{
   grid-column: 2 ;
   grid-row: 1;
-  text-align: left;
+  text-align: center;
   padding: 0 8px;
+  margin-top: 10px;
 }
 .sess-c{
   grid-column: 1;
   grid-row: 2;
   text-align: left;
-  background-color: tint($secondary-color, 90%);
-  padding: 8px;
+  padding: 12px;
+
 }
 
 
@@ -424,6 +469,18 @@
     color: $baby-powder;
     text-decoration: none;
   }
+}
+
+.sesh-bird {
+  display: flex;
+  list-style: none;
+  margin-bottom: 2px;
+  margin-right: 5px;
+  width: 400px;
+}
+.list-box {
+  border: 0;
+  padding: 2px 10px;
 }
 
 // Registration
@@ -525,7 +582,7 @@
 }
 
 .page-content {
-  height: 100vh;
+  height: 100%;
   background-color: #fff;
   padding: 20px 10px 20px;
   -webkit-box-shadow: 0 0 6px 0px rgba(46, 41, 78, .3);

@@ -32,13 +32,13 @@ fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lon}`, requ
 
         birds.forEach((bird) => {
             output +=
-                `<li class="list-group-item sesh-bird">
-   <div id="${bird.speciesCode}Code">${bird.speciesCode}</div>
-
-                         <a class="bird-name ${bird.speciesCode}" href="https://ebird.org/species/${bird.speciesCode}/US">
+                `<li class="sesh-bird">
+   <div id="${bird.speciesCode}Code" class="hide">${bird.speciesCode}</div>
+<div class="bird-name">
+                         <a class="${bird.speciesCode}" href="https://ebird.org/species/${bird.speciesCode}/US">
                             ${bird.comName}</a> 
-
-                         <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#${bird.speciesCode}SeshModal">
+</div>
+                         <button type="button" class="btn bird-btn-addlist" data-toggle="modal" data-target="#${bird.speciesCode}SeshModal">
                                 Add bird
                          </button>
                          
@@ -61,15 +61,17 @@ fetch(`https://api.ebird.org/v2/data/obs/geo/recent?lat=${lat}&lng=${lon}`, requ
                     <form action="" method="POST" class="form-group">
                    
                     
-                    <input type="text" name="watchSession" value="Hello" id="${bird.speciesCode}Id">
-                     <input type="text" name="id" value="${bird.comName}">
-                     <input type="text" name="comName" value="${bird.comName}">
-                      <input type="text" name="speciesCode" value="${bird.speciesCode}">
-                       <label for="">Number spotted</label>
-                    <input type="Number" name="count" value="0">
+                     <input class="hide" type="text" name="id" value="${bird.comName}">
+                     
+                     <input class="input-no-box hide" type="text" name="comName" value="${bird.comName}">
+                     
+                      <input class="hide" type="text" name="speciesCode" value="${bird.speciesCode}">
+                       <label for=""><h5>Number of birds spotted</h5></label>
+                    <input class="input-box" type="Number" name="count" value="0">
+                    <div class="mt-3 right">
                     <button type="Submit" class="btn btn-primary">Add Bird</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      
+      </div>
                    
                  </form>
               </div>

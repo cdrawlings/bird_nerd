@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const BirdCountSchema = new mongoose.Schema({
+const CountSchema = new mongoose.Schema({
     count: {
         type: Number,
     },
@@ -32,7 +32,7 @@ const WatchSessionSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Location'
     },
-    birdcount: [BirdCountSchema]
+    count: [CountSchema]
 });
 
 module.exports = mongoose.model('WatchSession', WatchSessionSchema)
